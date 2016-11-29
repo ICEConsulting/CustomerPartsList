@@ -20,13 +20,12 @@ namespace Tecan_Parts
             mainForm = inst;
         }
 
-        public ProfileForm(Boolean howCalled)
+        public ProfileForm(Boolean NeedsBD)
         {
             InitializeComponent();
-            doInitialization = howCalled;
+            doInitialization = NeedsBD;
             loadStateComboBox();
             String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
-            // if (File.Exists(profileFile) && !doInitialization)
             if (File.Exists(profileFile))
                 {
                 System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Profile));
@@ -199,19 +198,21 @@ namespace Tecan_Parts
                 writer.Serialize(file, profile);
                 file.Close();
                 this.Close();
+                
                 if (doInitialization)
                 {
                     Boolean fileFound;
                     fileFound = mainForm.copyDatabaseToWorkingFolder(profile.DistributionFolder);
-                    if (!fileFound)
+                    if(!fileFound)
                     {
                         MessageBox.Show("The Distribution Folder you selected does not contain the Parts List Database!\n\nPlease select a new folder");
-                        ProfileForm profileForm = new ProfileForm(false);
+                        ProfileForm profileForm = new ProfileForm(true);
                         profileForm.Show();
                         Application.OpenForms["ProfileForm"].BringToFront();
                     }
                     else
                     {
+                        mainForm.getUsersProfile();
                         mainForm.MainQuoteForm_Load(sender, e);
                     }
                 }
@@ -229,7 +230,7 @@ namespace Tecan_Parts
                 ProfilePhoneTextBox.Text = ProfilePhoneTextBox.Text + "-";
             if (ProfilePhoneTextBox.Text.Length == 7)
                 ProfilePhoneTextBox.Text = ProfilePhoneTextBox.Text + "-";
-            ProfilePhoneTextBox.SelectionStart = ProfilePhoneTextBox.Text.Length;
+                ProfilePhoneTextBox.SelectionStart = ProfilePhoneTextBox.Text.Length;
 
         }
 

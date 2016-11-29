@@ -36,8 +36,8 @@ namespace Tecan_Parts
 
         PartsListDetailDisplay DetailsForm;
         Profile profile = new Profile();
-        private System.Drawing.Font printFont;
-        private StreamReader streamToPrint;
+        // private System.Drawing.Font printFont;
+        // private StreamReader streamToPrint;
 
         public MainQuoteForm()
         {
@@ -77,76 +77,113 @@ namespace Tecan_Parts
             }
         }
 
-        // Called from Form Shown event, Only processed if there is no current database
-        // Reads or Creates this users profile xml file.
+        // Called from Form Shown Event!
+        // Reads or Creates users profile xml file.
         private void getProfileAndDatabase(object sender, EventArgs e)
         {
             String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
-
-            // If = 1 then no DB, requires intilization
-            if (partsListBindingSource.Count == 1)
+            // Normal Condition, just load profile and run
+            if (File.Exists(profileFile) && partsListBindingSource.Count > 1)
             {
-
-                if (MessageBox.Show("The Tecan Parts List must be intilized!\r\n\r\nDo you want to perform intialization now?", "Initial Installation", MessageBoxButtons.YesNo) == DialogResult.No)
-                {
-                    this.Close();
-                }
-                else
-                {
-                    if (!File.Exists(profileFile))
-                    {
-                        ProfileForm profileForm = new ProfileForm(true);
-                        profileForm.SetForm1Instance(this);
-                        profileForm.Show();
-                        Application.OpenForms["ProfileForm"].BringToFront();
-                    }
-                    else
-                    {
-                        // Profile exists, get distrubtion folder and then database
-                        String distributionFolder;
-                        getUsersProfile();
-                        distributionFolder = profile.DistributionFolder;
-
-                        if (distributionFolder == null)
-                        {
-                            ProfileForm profileForm = new ProfileForm(true);
-                            profileForm.SetForm1Instance(this);
-                            profileForm.Show();
-                            Application.OpenForms["ProfileForm"].BringToFront();
-                            MessageBox.Show("There's a problem with your profile settings.  Please re-enter and save your information!");
-                        }
-
-                        Boolean fileFound;
-                        fileFound = copyDatabaseToWorkingFolder(distributionFolder);
-                        if (!fileFound)
-                        {
-                            MessageBox.Show("The Distribution Folder you selected in your profile does not contain the Parts List Database!\n\nPlease select a new folder");
-                            ProfileForm profileForm = new ProfileForm(true);
-                            profileForm.SetForm1Instance(this);
-                            profileForm.Show();
-                            Application.OpenForms["ProfileForm"].BringToFront();
-                        }
-                        else
-                        {
-                            MainQuoteForm_Load(sender, e);
-                        }
-                    }
-                }
+                getUsersProfile();
             }
-            else
+            // Checks DB and copies / loads if required
+            else if (partsListBindingSource.Count == 1)
             {
-                if (!File.Exists(profileFile))
-                {
-                    ProfileForm profileForm = new ProfileForm(false);
-                    profileForm.SetForm1Instance(this);
-                    profileForm.Show();
-                    Application.OpenForms["ProfileForm"].BringToFront();
-                }
-                else
-                {
-                    getUsersProfile();
-                }
+                showUserProfileForm(true);
             }
+            else if (!File.Exists(profileFile))
+            {
+                showUserProfileForm(false);
+            }
+
+            // Checks DB and copies / loads if required
+            //if (partsListBindingSource.Count == 1)
+            //{
+            //    String distributionFolder = "";
+            //    distributionFolder = profile.DistributionFolder;
+            //    Boolean fileFound = false;
+            //    fileFound = copyDatabaseToWorkingFolder(distributionFolder);
+            //    while(!fileFound)
+            //    {
+            //        MessageBox.Show("The Distribution Folder you selected in your profile does not contain the Parts List Database!\n\nPlease select a new folder");
+            //        showUserProfileForm(true);
+            //        distributionFolder = profile.DistributionFolder;
+            //        fileFound = copyDatabaseToWorkingFolder(distributionFolder);
+            //    }
+            //}
+            //// If = 1 then no DB, requires intilization
+            //if (partsListBindingSource.Count == 1)
+            //{
+
+            //    if (MessageBox.Show("The Tecan Parts List must be intilized!\r\n\r\nDo you want to perform intialization now?", "Initial Installation", MessageBoxButtons.YesNo) == DialogResult.No)
+            //    {
+            //        this.Close();
+            //    }
+            //    else
+            //    {
+            //        if (!File.Exists(profileFile))
+            //        {
+            //            ProfileForm profileForm = new ProfileForm(true);
+            //            profileForm.SetForm1Instance(this);
+            //            profileForm.Show();
+            //            Application.OpenForms["ProfileForm"].BringToFront();
+            //        }
+            //        else
+            //        {
+            //            // Profile exists, get distrubtion folder and then database
+            //            String distributionFolder;
+            //            getUsersProfile();
+            //            distributionFolder = profile.DistributionFolder;
+
+            //            if (distributionFolder == null)
+            //            {
+            //                ProfileForm profileForm = new ProfileForm(true);
+            //                profileForm.SetForm1Instance(this);
+            //                profileForm.Show();
+            //                Application.OpenForms["ProfileForm"].BringToFront();
+            //                MessageBox.Show("There's a problem with your profile settings.  Please re-enter and save your information!");
+            //            }
+
+            //            Boolean fileFound;
+            //            fileFound = copyDatabaseToWorkingFolder(distributionFolder);
+            //            if (!fileFound)
+            //            {
+            //                MessageBox.Show("The Distribution Folder you selected in your profile does not contain the Parts List Database!\n\nPlease select a new folder");
+            //                ProfileForm profileForm = new ProfileForm(true);
+            //                profileForm.SetForm1Instance(this);
+            //                profileForm.Show();
+            //                Application.OpenForms["ProfileForm"].BringToFront();
+            //            }
+            //            else
+            //            {
+            //                MainQuoteForm_Load(sender, e);
+            //            }
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    if (!File.Exists(profileFile))
+            //    {
+            //        ProfileForm profileForm = new ProfileForm(false);
+            //        profileForm.SetForm1Instance(this);
+            //        profileForm.Show();
+            //        Application.OpenForms["ProfileForm"].BringToFront();
+            //    }
+            //    else
+            //    {
+            //        getUsersProfile();
+            //    }
+            //}
+        }
+
+        public void showUserProfileForm(Boolean NeedsDB)
+        {
+            ProfileForm profileForm = new ProfileForm(NeedsDB);
+            profileForm.SetForm1Instance(this);
+            profileForm.Show();
+            Application.OpenForms["ProfileForm"].BringToFront();
         }
 
         // If blank database or new database available copy new database to working folder
@@ -176,6 +213,7 @@ namespace Tecan_Parts
                 return false; 
             }
 
+            getUsersProfile();
             FileInfo fi = new FileInfo(quoteSourceFile);
             profile.DatabaseCreationDate = fi.CreationTime;
             saveUsersProfile();
@@ -254,6 +292,10 @@ namespace Tecan_Parts
             Boolean CatchError = false;
             if (e.Button == MouseButtons.Left)
             {
+                if (QuoteTabControl.SelectedTab == QuoteSettingTabPage)
+                {
+                    QuoteTabControl.SelectedTab = OptionTabPage;
+                }
                 partsListDataGridView.DoDragDrop(partsListDataGridView.SelectedRows, DragDropEffects.Move);
             }
             else
@@ -1061,10 +1103,7 @@ namespace Tecan_Parts
 
         private void myProfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProfileForm profileForm = new ProfileForm(false);
-            profileForm.SetForm1Instance(this);
-            profileForm.Show();
-            Application.OpenForms["ProfileForm"].BringToFront();
+            showUserProfileForm(false);
         }
 
         public void getUsersProfile()
@@ -1158,10 +1197,7 @@ namespace Tecan_Parts
 
         private void profileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProfileForm profileForm = new ProfileForm(false);
-            profileForm.SetForm1Instance(this);
-            profileForm.Show();
-            Application.OpenForms["ProfileForm"].BringToFront();
+            showUserProfileForm(false);
         }
 
         //private void viewQuoteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1223,13 +1259,11 @@ namespace Tecan_Parts
             if (!fileFound)
             {
                 MessageBox.Show("The Distribution Folder you selected in your profile does not contain the Parts List Database!\n\nPlease select a new folder");
-                ProfileForm profileForm = new ProfileForm(true);
-                profileForm.SetForm1Instance(this);
-                profileForm.Show();
-                Application.OpenForms["ProfileForm"].BringToFront();
+                showUserProfileForm(true);
             }
             else
             {
+                MessageBox.Show("New Parts List Database Loaded!");
                 MainQuoteForm_Load(sender, e);
             }
 
