@@ -190,36 +190,46 @@ namespace Tecan_Parts
         // todo See if Supplemental database is needed
         public Boolean copyDatabaseToWorkingFolder(String sourcePath)
         {
-            String quoteSourceFile = "";
-            String supplementSourceFile;
-            
-            // Where new files will go
-            String quoteTargetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanCustomerPartsList.sdf");
-            String supplementTargetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanSuppDocs.sdf");
-
-            // Where the new files will come from
-            try
+            String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
+            if (File.Exists(profileFile))
             {
-                quoteSourceFile = System.IO.Path.Combine(sourcePath, "TecanCustomerPartsList.sdf");
-            }
+                String quoteSourceFile = "";
+                String supplementSourceFile;
+
+                // Where new files will go
+                String quoteTargetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanCustomerPartsList.sdf");
+                String supplementTargetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanSuppDocs.sdf");
+
+                // Where the new files will come from
+                try
+                {
+                    quoteSourceFile = System.IO.Path.Combine(sourcePath, "TecanCustomerPartsList.sdf");
+                }
                 catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+                supplementSourceFile = System.IO.Path.Combine(sourcePath, "TecanSuppDocs.sdf");
+
+                // Verify the files exisit before copy
+                if (!File.Exists(quoteSourceFile))
+                {
+                    return false;
+                }
+
+                getUsersProfile();
+                FileInfo fi = new FileInfo(quoteSourceFile);
+                profile.DatabaseCreationDate = fi.CreationTime;
+                saveUsersProfile();
+                System.IO.File.Copy(quoteSourceFile, quoteTargetFile, true);
+                System.IO.File.Copy(supplementSourceFile, supplementTargetFile, true);
+                return true;
+            }
+            else
             {
-                MessageBox.Show(ex.Message.ToString());
+                getUsersProfile();
+                return false;
             }
-            supplementSourceFile = System.IO.Path.Combine(sourcePath, "TecanSuppDocs.sdf");
-
-            // Verify the files exisit before copy
-            if (!File.Exists(quoteSourceFile)) { 
-                return false; 
-            }
-
-            getUsersProfile();
-            FileInfo fi = new FileInfo(quoteSourceFile);
-            profile.DatabaseCreationDate = fi.CreationTime;
-            saveUsersProfile();
-            System.IO.File.Copy(quoteSourceFile, quoteTargetFile, true);
-            System.IO.File.Copy(supplementSourceFile, supplementTargetFile, true);
-            return true;
         }
 
         // Initial Lookup Table lists, used for filtering displayed Parts
@@ -1109,23 +1119,30 @@ namespace Tecan_Parts
         public void getUsersProfile()
         {
             String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
-            System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Profile));
-            System.IO.StreamReader file = new System.IO.StreamReader(profileFile);
-            // Profile profile = new Profile();
-            profile = (Profile)reader.Deserialize(file);
-            file.Close();
-            SalemansNameLabel.Text = "Welcome " + profile.Name;
-            ProfileNameTextBox.Text = profile.Name;
-            ProfileCompanyTextBox.Text = profile.Company;
-            ProfilePhoneTextBox.Text = profile.Phone;
-            ProfileEmailTextBox.Text = profile.Email;
-            ProfileShippingAddressTextBox.Text = profile.ShippingAddress;
-            ProfileCityTextBox.Text = profile.City;
-            loadStateComboBox();
-            ProfileStateComboBox.SelectedIndex = ProfileStateComboBox.FindStringExact(profile.State);
-            ProfileZipcodeTextBox.Text = profile.Zipcode;
-            ProfileTecanEmailTextBox.Text = profile.TecanEmail;
-
+            if (File.Exists(profileFile))
+            {
+                System.Xml.Serialization.XmlSerializer reader = new System.Xml.Serialization.XmlSerializer(typeof(Profile));
+                System.IO.StreamReader file = new System.IO.StreamReader(profileFile);
+                // Profile profile = new Profile();
+                profile = (Profile)reader.Deserialize(file);
+                file.Close();
+                SalemansNameLabel.Text = "Welcome " + profile.Name;
+                ProfileNameTextBox.Text = profile.Name;
+                ProfileCompanyTextBox.Text = profile.Company;
+                ProfilePhoneTextBox.Text = profile.Phone;
+                ProfileEmailTextBox.Text = profile.Email;
+                ProfileShippingAddressTextBox.Text = profile.ShippingAddress;
+                ProfileCityTextBox.Text = profile.City;
+                loadStateComboBox();
+                ProfileStateComboBox.SelectedIndex = ProfileStateComboBox.FindStringExact(profile.State);
+                ProfileZipcodeTextBox.Text = profile.Zipcode;
+                ProfileTecanEmailTextBox.Text = profile.TecanEmail;
+            }
+            else
+            {
+                MessageBox.Show("There was an error getting your profile information!\n\nPlease reenter your profile");
+                showUserProfileForm(false);
+            }
         }
 
         private void loadStateComboBox()

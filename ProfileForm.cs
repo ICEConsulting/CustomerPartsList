@@ -206,9 +206,10 @@ namespace Tecan_Parts
                     if(!fileFound)
                     {
                         MessageBox.Show("The Distribution Folder you selected does not contain the Parts List Database!\n\nPlease select a new folder");
-                        ProfileForm profileForm = new ProfileForm(true);
-                        profileForm.Show();
-                        Application.OpenForms["ProfileForm"].BringToFront();
+                        mainForm.showUserProfileForm(true);
+                        //ProfileForm profileForm = new ProfileForm(true);
+                        //profileForm.Show();
+                        //Application.OpenForms["ProfileForm"].BringToFront();
                     }
                     else
                     {
