@@ -13,6 +13,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 using System.Globalization;
 using iTextSharp;
 using iTextSharp.text;
@@ -469,7 +470,13 @@ namespace Tecan_Parts
                 }
                 else
                 {
-                    partImagePictureBox.Image = null;
+                    // partImagePictureBox.Image = null;
+                    System.Reflection.Assembly myAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                    Stream myStream = myAssembly.GetManifestResourceStream("Tecan_Parts.noimage.bmp");
+                    Bitmap image = new Bitmap(myStream);
+                    System.Drawing.Image newImage = image;
+                    newImage = ResizeImage(newImage, new Size(123, 135));
+                    partImagePictureBox.Image = newImage;
                 }
 
             }
@@ -1140,7 +1147,7 @@ namespace Tecan_Parts
             }
             else
             {
-                MessageBox.Show("There was an error getting your profile information!\n\nPlease reenter your profile");
+                MessageBox.Show("There was an error getting your profile information!\n\nPlease re-enter your profile");
                 showUserProfileForm(false);
             }
         }
@@ -1270,20 +1277,27 @@ namespace Tecan_Parts
 
         private void updateDatabaseFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String distributionFolder = profile.DistributionFolder;
-            Boolean fileFound;
-            fileFound = copyDatabaseToWorkingFolder(distributionFolder);
-            if (!fileFound)
+            String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
+            if (File.Exists(profileFile))
             {
-                MessageBox.Show("The Distribution Folder you selected in your profile does not contain the Parts List Database!\n\nPlease select a new folder");
-                showUserProfileForm(true);
+                String distributionFolder = profile.DistributionFolder;
+                Boolean fileFound;
+                fileFound = copyDatabaseToWorkingFolder(distributionFolder);
+                if (!fileFound)
+                {
+                    MessageBox.Show("The Distribution Folder you selected in your profile does not contain the Parts List Database!\n\nPlease select a new folder");
+                    showUserProfileForm(true);
+                }
+                else
+                {
+                    MessageBox.Show("New Parts List Database Loaded!");
+                    MainQuoteForm_Load(sender, e);
+                }
             }
             else
             {
-                MessageBox.Show("New Parts List Database Loaded!");
-                MainQuoteForm_Load(sender, e);
+                getUsersProfile();
             }
-
         }
 
         private void updateActionStatus(string status)
