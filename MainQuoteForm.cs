@@ -68,8 +68,8 @@ namespace Tecan_Parts
             if (partsListBindingSource.Count != 0)
             {
                 loadFilterComboBoxes();
-                int newGridHeight;
-                newGridHeight = Screen.PrimaryScreen.Bounds.Height - this.menuStrip1.Height;
+                // int newGridHeight;
+                // newGridHeight = Screen.PrimaryScreen.Bounds.Height - this.menuStrip1.Height;
                 // this.partsListDataGridView.Height = newGridHeight - 500;
                 this.partsListDataGridView.Height = 425;
                 setPartDetailTextBox();

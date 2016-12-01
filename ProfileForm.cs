@@ -104,7 +104,7 @@ namespace Tecan_Parts
         private void BrowseDistributionFolderButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-            folderBrowserDialog1.Description = "Please select your Quote Database Distribution Folder";
+            folderBrowserDialog1.Description = "Please select your Parts List Database Distribution Folder";
             folderBrowserDialog1.ShowNewFolderButton = false;
 
             String sourcePath = "";
@@ -207,9 +207,6 @@ namespace Tecan_Parts
                     {
                         MessageBox.Show("The Distribution Folder you selected does not contain the Parts List Database!\n\nPlease select a new folder");
                         mainForm.showUserProfileForm(true);
-                        //ProfileForm profileForm = new ProfileForm(true);
-                        //profileForm.Show();
-                        //Application.OpenForms["ProfileForm"].BringToFront();
                     }
                     else
                     {
