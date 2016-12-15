@@ -124,7 +124,13 @@ namespace Tecan_Parts
                 }
                 else
                 {
-                    partImagePictureBox.Image = null;
+                    // If no image available
+                    System.Reflection.Assembly myAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+                    Stream myStream = myAssembly.GetManifestResourceStream("Tecan_Parts.noimage.bmp");
+                    Bitmap image = new Bitmap(myStream);
+                    System.Drawing.Image newImage = image;
+                    newImage = ResizeImage(newImage, new Size(396, 224));
+                    partImagePictureBox.Image = newImage;
                 }
                     
             }
@@ -350,62 +356,62 @@ namespace Tecan_Parts
             LoadParts(selectedSAPID);
         }
 
-        private void RequiredListView_Click(object sender, EventArgs e)
-        {
-            String RequiredSAPID = RequiredListView.SelectedItems[0].Text;
-            AlternativesListView.Items.Clear();
+        //private void RequiredListView_Click(object sender, EventArgs e)
+        //{
+        //    String RequiredSAPID = RequiredListView.SelectedItems[0].Text;
+        //    AlternativesListView.Items.Clear();
             
-            String[] AlternateSAP = new String[10];
-            String[] AlternateDescription = new String[10];
+        //    String[] AlternateSAP = new String[10];
+        //    String[] AlternateDescription = new String[10];
 
-            openDB();
-            SqlCeCommand cmd = TecanDatabase.CreateCommand();
+        //    openDB();
+        //    SqlCeCommand cmd = TecanDatabase.CreateCommand();
 
-            cmd.CommandText = "SELECT Alternatives FROM RequiredParts WHERE SAPId = '" + sAPIdTextBox.Text + "' AND RequiredSAPId = '" + RequiredSAPID + "'";
-            try
-            {
-                SqlCeDataReader reader = cmd.ExecuteReader();
+        //    cmd.CommandText = "SELECT Alternatives FROM RequiredParts WHERE SAPId = '" + sAPIdTextBox.Text + "' AND RequiredSAPId = '" + RequiredSAPID + "'";
+        //    try
+        //    {
+        //        SqlCeDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read())
-                {
-                    AlternateSAP = reader[0].ToString().Split(',');
-                }
-                reader.Dispose();
+        //        while (reader.Read())
+        //        {
+        //            AlternateSAP = reader[0].ToString().Split(',');
+        //        }
+        //        reader.Dispose();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
 
-            for (int i = 0; i < AlternateSAP.Length; i++)
-            {
-                cmd.CommandText = "SELECT Description FROM PartsList WHERE SAPId = '" + AlternateSAP[i] + "'";
-                try
-                {
-                    SqlCeDataReader reader = cmd.ExecuteReader();
+        //    for (int i = 0; i < AlternateSAP.Length; i++)
+        //    {
+        //        cmd.CommandText = "SELECT Description FROM PartsList WHERE SAPId = '" + AlternateSAP[i] + "'";
+        //        try
+        //        {
+        //            SqlCeDataReader reader = cmd.ExecuteReader();
 
-                    while (reader.Read())
-                    {
-                        AlternateDescription[i] = reader[0].ToString();
-                    }
-                    reader.Dispose();
+        //            while (reader.Read())
+        //            {
+        //                AlternateDescription[i] = reader[0].ToString();
+        //            }
+        //            reader.Dispose();
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            TecanDatabase.Close();
-            for (int i = 0; i < AlternateSAP.Length; i++)
-            {
-                AlternativesListView.Items.Add(AlternateSAP[i]);
-                AlternativesListView.Items[i].SubItems.Add(AlternateDescription[i]);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //    }
+        //    TecanDatabase.Close();
+        //    for (int i = 0; i < AlternateSAP.Length; i++)
+        //    {
+        //        AlternativesListView.Items.Add(AlternateSAP[i]);
+        //        AlternativesListView.Items[i].SubItems.Add(AlternateDescription[i]);
 
-            }
+        //    }
 
-        }
+        //}
 
         private void openDB()
         {
