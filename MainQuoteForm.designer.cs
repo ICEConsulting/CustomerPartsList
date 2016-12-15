@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainQuoteForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             this.partsListDataGridView = new System.Windows.Forms.DataGridView();
             this.sAPIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,6 +130,13 @@
             this.SubCategoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.subCategoryTableAdapter = new Tecan_Parts.TecanCustomerPartsListDataSetTableAdapters.SubCategoryTableAdapter();
             this.actionStatusLabel = new System.Windows.Forms.Label();
+            this.RequiredPartsPanel = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.RequiredPartsPanelSelectAllCheckBox = new System.Windows.Forms.CheckBox();
+            this.RequiredPartsPanelHeadingLabel = new System.Windows.Forms.Label();
+            this.RequiredPartCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.RequiredPanelAddButton = new System.Windows.Forms.Button();
+            this.RequiredPanelCancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.partsListDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.partsListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tecanCustomerPartsListDataSet)).BeginInit();
@@ -143,32 +150,33 @@
             ((System.ComponentModel.ISupportInitialize)(this.InstrumentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CategoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SubCategoryBindingSource)).BeginInit();
+            this.RequiredPartsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // partsListDataGridView
             // 
             this.partsListDataGridView.AutoGenerateColumns = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.partsListDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.partsListDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
             this.partsListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.partsListDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sAPIdDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});
             this.partsListDataGridView.DataSource = this.partsListBindingSource;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.partsListDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.partsListDataGridView.DefaultCellStyle = dataGridViewCellStyle32;
             this.partsListDataGridView.Location = new System.Drawing.Point(6, 265);
             this.partsListDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.partsListDataGridView.Name = "partsListDataGridView";
@@ -470,14 +478,14 @@
             // OptionsDataGridView
             // 
             this.OptionsDataGridView.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OptionsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OptionsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle33;
             this.OptionsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OptionsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -512,10 +520,10 @@
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle34.Format = "C2";
+            dataGridViewCellStyle34.NullValue = null;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridViewTextBoxColumn4.FillWeight = 70F;
             this.dataGridViewTextBoxColumn4.HeaderText = "Price";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
@@ -525,9 +533,9 @@
             // 
             // dataGridViewTextBoxColumn5
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Format = "N0";
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle35.Format = "N0";
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle35;
             this.dataGridViewTextBoxColumn5.FillWeight = 30F;
             this.dataGridViewTextBoxColumn5.HeaderText = "Qty";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
@@ -537,10 +545,10 @@
             // 
             // dataGridViewTextBoxColumn7
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle36.Format = "C2";
+            dataGridViewCellStyle36.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle36;
             this.dataGridViewTextBoxColumn7.FillWeight = 80F;
             this.dataGridViewTextBoxColumn7.HeaderText = "Extended Price";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
@@ -936,10 +944,10 @@
             // 
             // Column6
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "C2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle37.Format = "C2";
+            dataGridViewCellStyle37.NullValue = null;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle37;
             this.Column6.FillWeight = 80F;
             this.Column6.HeaderText = "Extended Price";
             this.Column6.Name = "Column6";
@@ -948,10 +956,10 @@
             // 
             // Column5
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = "0";
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle38.Format = "N2";
+            dataGridViewCellStyle38.NullValue = "0";
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle38;
             this.Column5.FillWeight = 60F;
             this.Column5.HeaderText = "Discount";
             this.Column5.Name = "Column5";
@@ -959,9 +967,9 @@
             // 
             // Column4
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.Format = "N0";
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle39.Format = "N0";
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle39;
             this.Column4.FillWeight = 30F;
             this.Column4.HeaderText = "Qty";
             this.Column4.Name = "Column4";
@@ -971,10 +979,10 @@
             // 
             // Column3
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "C2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle40.Format = "C2";
+            dataGridViewCellStyle40.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle40;
             this.Column3.FillWeight = 70F;
             this.Column3.HeaderText = "List Price";
             this.Column3.Name = "Column3";
@@ -1058,12 +1066,90 @@
             this.actionStatusLabel.Size = new System.Drawing.Size(0, 21);
             this.actionStatusLabel.TabIndex = 44;
             // 
+            // RequiredPartsPanel
+            // 
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPanelCancelButton);
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPanelAddButton);
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPartCheckedListBox);
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPartsPanelHeadingLabel);
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPartsPanelSelectAllCheckBox);
+            this.RequiredPartsPanel.Controls.Add(this.label19);
+            this.RequiredPartsPanel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPartsPanel.Location = new System.Drawing.Point(519, 375);
+            this.RequiredPartsPanel.Name = "RequiredPartsPanel";
+            this.RequiredPartsPanel.Size = new System.Drawing.Size(870, 499);
+            this.RequiredPartsPanel.TabIndex = 45;
+            this.RequiredPartsPanel.Visible = false;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(355, 19);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(151, 24);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "Required Parts";
+            // 
+            // RequiredPartsPanelSelectAllCheckBox
+            // 
+            this.RequiredPartsPanelSelectAllCheckBox.AutoSize = true;
+            this.RequiredPartsPanelSelectAllCheckBox.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPartsPanelSelectAllCheckBox.Location = new System.Drawing.Point(122, 127);
+            this.RequiredPartsPanelSelectAllCheckBox.Name = "RequiredPartsPanelSelectAllCheckBox";
+            this.RequiredPartsPanelSelectAllCheckBox.Size = new System.Drawing.Size(117, 27);
+            this.RequiredPartsPanelSelectAllCheckBox.TabIndex = 1;
+            this.RequiredPartsPanelSelectAllCheckBox.Text = "Select All";
+            this.RequiredPartsPanelSelectAllCheckBox.UseVisualStyleBackColor = true;
+            this.RequiredPartsPanelSelectAllCheckBox.CheckedChanged += new System.EventHandler(this.RequiredPartsPanelSelectAllCheckBox_CheckedChanged);
+            // 
+            // RequiredPartsPanelHeadingLabel
+            // 
+            this.RequiredPartsPanelHeadingLabel.AutoSize = true;
+            this.RequiredPartsPanelHeadingLabel.Location = new System.Drawing.Point(75, 59);
+            this.RequiredPartsPanelHeadingLabel.Name = "RequiredPartsPanelHeadingLabel";
+            this.RequiredPartsPanelHeadingLabel.Size = new System.Drawing.Size(0, 21);
+            this.RequiredPartsPanelHeadingLabel.TabIndex = 2;
+            // 
+            // RequiredPartCheckedListBox
+            // 
+            this.RequiredPartCheckedListBox.FormattingEnabled = true;
+            this.RequiredPartCheckedListBox.Location = new System.Drawing.Point(122, 188);
+            this.RequiredPartCheckedListBox.Name = "RequiredPartCheckedListBox";
+            this.RequiredPartCheckedListBox.Size = new System.Drawing.Size(623, 188);
+            this.RequiredPartCheckedListBox.TabIndex = 3;
+            // 
+            // RequiredPanelAddButton
+            // 
+            this.RequiredPanelAddButton.BackColor = System.Drawing.Color.PowderBlue;
+            this.RequiredPanelAddButton.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPanelAddButton.Location = new System.Drawing.Point(283, 424);
+            this.RequiredPanelAddButton.Name = "RequiredPanelAddButton";
+            this.RequiredPanelAddButton.Size = new System.Drawing.Size(89, 34);
+            this.RequiredPanelAddButton.TabIndex = 4;
+            this.RequiredPanelAddButton.Text = "Add";
+            this.RequiredPanelAddButton.UseVisualStyleBackColor = false;
+            this.RequiredPanelAddButton.Click += new System.EventHandler(this.RequiredPanelAddButton_Click);
+            // 
+            // RequiredPanelCancelButton
+            // 
+            this.RequiredPanelCancelButton.BackColor = System.Drawing.Color.PowderBlue;
+            this.RequiredPanelCancelButton.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPanelCancelButton.Location = new System.Drawing.Point(496, 424);
+            this.RequiredPanelCancelButton.Name = "RequiredPanelCancelButton";
+            this.RequiredPanelCancelButton.Size = new System.Drawing.Size(120, 34);
+            this.RequiredPanelCancelButton.TabIndex = 5;
+            this.RequiredPanelCancelButton.Text = "Cancel";
+            this.RequiredPanelCancelButton.UseVisualStyleBackColor = false;
+            this.RequiredPanelCancelButton.Click += new System.EventHandler(this.RequiredPanelCancelButton_Click);
+            // 
             // MainQuoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.BlanchedAlmond;
             this.ClientSize = new System.Drawing.Size(1881, 1259);
+            this.Controls.Add(this.RequiredPartsPanel);
             this.Controls.Add(this.actionStatusLabel);
             this.Controls.Add(this.itemPriceTextBox);
             this.Controls.Add(this.label4);
@@ -1115,6 +1201,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.InstrumentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CategoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SubCategoryBindingSource)).EndInit();
+            this.RequiredPartsPanel.ResumeLayout(false);
+            this.RequiredPartsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1215,6 +1303,13 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ToolStripMenuItem updateDatabaseFilesToolStripMenuItem;
         private System.Windows.Forms.Label actionStatusLabel;
+        private System.Windows.Forms.Panel RequiredPartsPanel;
+        private System.Windows.Forms.Button RequiredPanelCancelButton;
+        private System.Windows.Forms.Button RequiredPanelAddButton;
+        private System.Windows.Forms.CheckedListBox RequiredPartCheckedListBox;
+        private System.Windows.Forms.Label RequiredPartsPanelHeadingLabel;
+        private System.Windows.Forms.CheckBox RequiredPartsPanelSelectAllCheckBox;
+        private System.Windows.Forms.Label label19;
     }
 }
 

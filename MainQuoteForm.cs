@@ -34,11 +34,13 @@ namespace Tecan_Parts
         Boolean categoryChanged = false;
         // Boolean subCategoryChanged = false;
         // Boolean formatOnly = false;
+        Boolean quoteSaved = true;
 
         PartsListDetailDisplay DetailsForm;
         Profile profile = new Profile();
         // private System.Drawing.Font printFont;
         // private StreamReader streamToPrint;
+        Quote passRequiredItems = new Quote();
 
         public MainQuoteForm()
         {
@@ -338,15 +340,19 @@ namespace Tecan_Parts
 
         private void SumItems(DataGridView myDataGridView)
         {
-            Int32 rowCount = myDataGridView.Rows.GetRowCount(DataGridViewElementStates.Displayed);
+            Int32 rowCount = myDataGridView.Rows.Count;
             Int32 rowIndex;
             Decimal itemPrice = 0;
+            Int32 itemQty = 0;
+            Decimal extendedPrice = 0;
 
             for (int s = 0; s < rowCount; s++)
             {
                 rowIndex = myDataGridView.Rows[s].Index;
                 DataGridViewRow srow = myDataGridView.Rows[rowIndex];
-                itemPrice = itemPrice + (Decimal)srow.Cells[4].Value;
+                itemPrice = (Decimal)srow.Cells[2].Value;
+                itemQty = Convert.ToInt32(srow.Cells[3].Value);
+                extendedPrice = extendedPrice + (itemPrice * itemQty);
             }
 
             switch (myDataGridView.Name)
@@ -356,13 +362,14 @@ namespace Tecan_Parts
                     break;
 
                 case "OptionsDataGridView":
-                    OptionsItemsPriceTextBox.Text = String.Format("{0:C2}", itemPrice); //getFormatedDollarValue(itemPrice.ToString());
+                    OptionsItemsPriceTextBox.Text = String.Format("{0:C2}", extendedPrice); //getFormatedDollarValue(itemPrice.ToString());
                     break;
             }
         }
 
         private void processCellValueChange(DataGridView myDataGridView, DataGridViewCellEventArgs e)
         {
+            quoteSaved = false;
             Decimal itemPrice;
             Int32 itemQty;
             // Decimal itemDiscount;
@@ -411,6 +418,7 @@ namespace Tecan_Parts
         // The drop into the desired object
         private void OptionsDataGridView_DragDrop(object sender, DragEventArgs e)
         {
+            quoteSaved = false;
             String itemSAPID;
             String itemDescription;
             Decimal itemPrice;
@@ -422,8 +430,125 @@ namespace Tecan_Parts
                 itemDescription = row.Cells[1].Value.ToString();
                 itemPrice = getPartPrice(itemSAPID);
                 OptionsDataGridView.Rows.Add(itemSAPID, itemDescription, itemPrice, 1, itemPrice);
+
+                // Check requiredParts
+                String[] hasRequiredParts = checkForRequiredParts(itemSAPID);
+                if (hasRequiredParts != null)
+                {
+                    // Check if they are already added
+                    DataGridViewRowCollection optionRows = OptionsDataGridView.Rows;
+                    String existsSAPID;
+                    var PartsToAddList = new List<string>();
+                    String[] requiredPart;
+                    Boolean foundSAPID = false;
+                    // Loop throught required parts
+                    foreach (String part in hasRequiredParts)
+                    {
+                        requiredPart = part.Split('^');
+                        foundSAPID = false;
+                        // Already selected items in options
+                        foreach (DataGridViewRow rowOption in optionRows)
+                        {
+                            existsSAPID = rowOption.Cells[0].Value.ToString();
+                            if (existsSAPID == requiredPart[0])
+                            {
+                                foundSAPID = true;
+                                break;
+                            }
+                        }
+                        if (!foundSAPID)
+                        {
+                            PartsToAddList.Add(part);
+                        }
+                    }
+                    String[] toAddPart = PartsToAddList.ToArray();
+                    switch (toAddPart.Length)
+                    {
+                        // Required part already added, do nothing
+                        case 0:
+                            break;
+
+                        // 1 required part, simple message
+                        case 1:
+                            String[] partToAdd = null;
+                            partToAdd = toAddPart[0].Split('^');
+                            Decimal partItemPrice = Convert.ToDecimal(partToAdd[2]);
+                            // Ask to add part
+                            if (MessageBox.Show("The part\r\n\r\n" + itemSAPID + "  " + itemDescription + "\r\n\r\nhas a required part \r\n\r\n" + partToAdd[0] + "  " + partToAdd[1] + ".\r\n\r\nDo you want to add it?", "Required Part", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            {
+                                OptionsDataGridView.Rows.Add(partToAdd[0], partToAdd[1], partItemPrice, 1, String.Format("{0:P2}", 0.00), partItemPrice);
+                            }
+                            break;
+
+                        // Multiple requires parts, do required panel
+                        default:
+                            // Ask to add parts
+                            RequiredPartCheckedListBox.Items.Clear();
+                            RequiredPartsPanelSelectAllCheckBox.Checked = false;
+                            RequiredPartsPanelHeadingLabel.Text = "The part " + itemSAPID + "  " + itemDescription + " has multiple parts that are required.\r\nPlease select (Double-Click) the parts you would like to add.";
+                            RequiredPartsPanel.Location = new Point(
+                            this.ClientSize.Width / 2 - RequiredPartsPanel.Size.Width / 2,
+                            this.ClientSize.Height / 2 - RequiredPartsPanel.Size.Height / 2);
+                            RequiredPartsPanel.Anchor = AnchorStyles.None;
+                            RequiredPartsPanel.Visible = true;
+
+                            ArrayList quoteItems = new ArrayList();
+                            foreach (String part in toAddPart)
+                            {
+                                requiredPart = part.Split('^');
+                                RequiredPartCheckedListBox.Items.Add(requiredPart[0] + "  " + requiredPart[1]);
+
+                                QuoteItems newItem = new QuoteItems();
+                                newItem.SAPID = requiredPart[0];
+                                newItem.Description = requiredPart[1];
+                                newItem.Price = Convert.ToDecimal(requiredPart[2]);
+                                quoteItems.Add(newItem);
+                            }
+                            passRequiredItems.QuoteTitle = "QuoteOptions";
+                            passRequiredItems.Items = quoteItems;
+                            break;
+                    }
+
+                }
             }
             SumItems(OptionsDataGridView);
+        }
+
+        private String[] checkForRequiredParts(String itemSAPID)
+        {
+            var foundRequiredPartsList = new List<string>();
+            openDB();
+            SqlCeCommand cmd = TecanDatabase.CreateCommand();
+
+            cmd.CommandText = "SELECT R.RequiredSAPId, P.Description, P.ILP FROM RequiredParts R" +
+            " INNER JOIN PartsList P " +
+            " ON R.RequiredSAPId = P.SAPId" +
+            " WHERE R.SAPId = '" + itemSAPID + "'" +
+            " ORDER BY RequiredSAPId";
+            try
+            {
+                SqlCeDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    foundRequiredPartsList.Add(reader[0].ToString() + "^" + reader[1].ToString() + "^" + reader[2].ToString());
+                }
+                reader.Dispose();
+                // return foundRequiredParts;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            TecanDatabase.Close();
+            if (foundRequiredPartsList.Count != 0)
+            {
+                String[] foundRequiredParts = foundRequiredPartsList.ToArray();
+                return foundRequiredParts;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         // Update Extended Price and Totals when QTY and/or Discount Change
@@ -942,6 +1067,7 @@ namespace Tecan_Parts
 
         private void RemoveItems(DataGridView myDataGridView)
         {
+            quoteSaved = false;
             Int32 selectedRowCount = myDataGridView.Rows.GetRowCount(DataGridViewElementStates.Selected);
             Int32 removedRowCount = 0;
             Int32 totalRowCount = myDataGridView.RowCount;
@@ -949,7 +1075,7 @@ namespace Tecan_Parts
             {
                 if (selectedRowCount == totalRowCount)
                 {
-                    MessageBox.Show("All cells are selected", "Selected Cells");
+                    // MessageBox.Show("All cells are selected", "Selected Cells");
                     myDataGridView.Rows.Clear();
                 }
                 else
@@ -1007,6 +1133,7 @@ namespace Tecan_Parts
             String tecanFilesFilePath = @"c:\TecanFiles";
             System.IO.Directory.CreateDirectory(tecanFilesFilePath);
 
+            quoteSaved = true;
             System.IO.StreamWriter file = new System.IO.StreamWriter(@"c:\TecanFiles\" + QuoteFileName);
             writer.Serialize(file, quote);
             file.Close();
@@ -1270,6 +1397,14 @@ namespace Tecan_Parts
 
         private void clearQuoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!quoteSaved)
+            {
+                if (MessageBox.Show("This order has not been saved or you have made changes!\r\n\r\nDo you want to clear these items?", "Clear List", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
             OptionsDataGridView.Rows.Clear();
             QuoteTitleTextBox.Text = "";
             OptionsItemsPriceTextBox.Text = "";
@@ -1480,6 +1615,44 @@ namespace Tecan_Parts
 
             return tempFilePath;
 
+        }
+
+        private void RequiredPanelAddButton_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            foreach (QuoteItems row in passRequiredItems.Items)
+            {
+                if (RequiredPartCheckedListBox.GetItemChecked(i))
+                {
+                    quoteSaved = false;
+                    OptionsDataGridView.Rows.Add(row.SAPID, row.Description, Convert.ToDecimal(row.Price), 1, String.Format("{0:P2}", 0.00), Convert.ToDecimal(row.Price));
+                }
+                i++;
+            }
+            RequiredPartsPanel.Visible = false;
+        }
+
+        private void RequiredPartsPanelSelectAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RequiredPartsPanelSelectAllCheckBox.Checked == true)
+            {
+                for (int i = 0; i < RequiredPartCheckedListBox.Items.Count; i++)
+                {
+                    RequiredPartCheckedListBox.SetItemChecked(i, true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < RequiredPartCheckedListBox.Items.Count; i++)
+                {
+                    RequiredPartCheckedListBox.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        private void RequiredPanelCancelButton_Click(object sender, EventArgs e)
+        {
+            RequiredPartsPanel.Visible = false;
         }
     }
 }
