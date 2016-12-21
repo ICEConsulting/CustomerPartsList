@@ -73,7 +73,7 @@ namespace Tecan_Parts
                 // int newGridHeight;
                 // newGridHeight = Screen.PrimaryScreen.Bounds.Height - this.menuStrip1.Height;
                 // this.partsListDataGridView.Height = newGridHeight - 500;
-                this.partsListDataGridView.Height = 425;
+                // this.partsListDataGridView.Height = 425;
                 setPartDetailTextBox();
                 OptionsDataGridView.AllowDrop = true;
                 QuoteTabControl.SelectedTab = QuoteSettingTabPage;
@@ -338,7 +338,7 @@ namespace Tecan_Parts
         }
 
 
-        private void SumItems(DataGridView myDataGridView)
+        public void SumItems(DataGridView myDataGridView)
         {
             Int32 rowCount = myDataGridView.Rows.Count;
             Int32 rowIndex;
@@ -370,15 +370,31 @@ namespace Tecan_Parts
         private void processCellValueChange(DataGridView myDataGridView, DataGridViewCellEventArgs e)
         {
             quoteSaved = false;
-            Decimal itemPrice;
-            Int32 itemQty;
+            Int32 rowIndex;
+            Decimal itemPrice = 0;
+            Int32 itemQty = 0;
             // Decimal itemDiscount;
             // Decimal discountPercentage;
             Decimal extendedPrice;
-            String itemPriceCheck;
+            // String itemPriceCheck;
             // String discountCheck;
 
-            itemPriceCheck = myDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
+            rowIndex = e.RowIndex;
+            DataGridViewRow srow = myDataGridView.Rows[rowIndex];
+            itemPrice = (Decimal)srow.Cells[2].Value;
+            itemQty = Convert.ToInt32(srow.Cells[3].Value);
+            // totalItemPrice = totalItemPrice + (itemPrice * itemQty);
+            // discountPercentage = Convert.ToDecimal(srow.Cells[4].Value.ToString().Replace(" %", ""));
+            // itemDiscount = (itemPrice * (discountPercentage / 100)) * itemQty;
+            // totalDiscount = totalDiscount + itemDiscount;
+            extendedPrice = itemPrice * itemQty;
+
+            // myDataGridView.Rows[e.RowIndex].Cells[4].Value = String.Format("{0:P2}", discountPercentage / 100);
+            // myDataGridView.Rows[e.RowIndex].Cells[5].Value = String.Format("{0:C2}", extendedPrice);
+            myDataGridView.Rows[e.RowIndex].Cells[4].Value = extendedPrice;
+            SumItems(myDataGridView);
+
+            // itemPriceCheck = myDataGridView.Rows[e.RowIndex].Cells[2].Value.ToString();
             // discountCheck = myDataGridView.Rows[e.RowIndex].Cells[4].Value.ToString();
 
             //if (itemPriceCheck.IndexOf("$") == -1)
@@ -386,24 +402,24 @@ namespace Tecan_Parts
             //    formatOnly = false;
             //}
 
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
-            {
-                if (itemPriceCheck.IndexOf("$") != -1) itemPriceCheck = itemPriceCheck.Substring(1, itemPriceCheck.Length - 1);
-                itemPrice = Convert.ToDecimal(itemPriceCheck);
+            //if (e.ColumnIndex == 2 || e.ColumnIndex == 3)
+            //{
+            //    if (itemPriceCheck.IndexOf("$") != -1) itemPriceCheck = itemPriceCheck.Substring(1, itemPriceCheck.Length - 1);
+            //    itemPrice = Convert.ToDecimal(itemPriceCheck);
 
-                // MessageBox.Show(myDataGridView.Rows[e.RowIndex].Cells[3].Value.ToString());
-                itemQty = Convert.ToInt32(myDataGridView.Rows[e.RowIndex].Cells[3].Value);
-                extendedPrice = itemPrice * itemQty;
-                myDataGridView.Rows[e.RowIndex].Cells[4].Value = extendedPrice;
-                SumItems(myDataGridView);
-            }
+            //    // MessageBox.Show(myDataGridView.Rows[e.RowIndex].Cells[3].Value.ToString());
+            //    itemQty = Convert.ToInt32(myDataGridView.Rows[e.RowIndex].Cells[3].Value);
+            //    extendedPrice = itemPrice * itemQty;
+            //    myDataGridView.Rows[e.RowIndex].Cells[4].Value = extendedPrice;
+            //    SumItems(myDataGridView);
+            //}
 
-            if (itemPriceCheck.IndexOf("$") == -1)
-            {
-                // formatOnly = true;
-                itemPrice = Convert.ToDecimal(itemPriceCheck);
-                OptionsDataGridView.Rows[e.RowIndex].Cells[2].Value = String.Format("{0:C2}", itemPrice);
-            }
+            //if (itemPriceCheck.IndexOf("$") == -1)
+            //{
+            //    // formatOnly = true;
+            //    itemPrice = Convert.ToDecimal(itemPriceCheck);
+            //    OptionsDataGridView.Rows[e.RowIndex].Cells[2].Value = String.Format("{0:C2}", itemPrice);
+            //}
 
         }
 
@@ -435,86 +451,87 @@ namespace Tecan_Parts
                 String[] hasRequiredParts = checkForRequiredParts(itemSAPID);
                 if (hasRequiredParts != null)
                 {
-                    // Check if they are already added
-                    DataGridViewRowCollection optionRows = OptionsDataGridView.Rows;
-                    String existsSAPID;
-                    var PartsToAddList = new List<string>();
-                    String[] requiredPart;
-                    Boolean foundSAPID = false;
-                    // Loop throught required parts
-                    foreach (String part in hasRequiredParts)
-                    {
-                        requiredPart = part.Split('^');
-                        foundSAPID = false;
-                        // Already selected items in options
-                        foreach (DataGridViewRow rowOption in optionRows)
-                        {
-                            existsSAPID = rowOption.Cells[0].Value.ToString();
-                            if (existsSAPID == requiredPart[0])
-                            {
-                                foundSAPID = true;
-                                break;
-                            }
-                        }
-                        if (!foundSAPID)
-                        {
-                            PartsToAddList.Add(part);
-                        }
-                    }
-                    String[] toAddPart = PartsToAddList.ToArray();
-                    switch (toAddPart.Length)
-                    {
-                        // Required part already added, do nothing
-                        case 0:
-                            break;
+                    doAddRequiredParts(hasRequiredParts, itemSAPID, itemDescription);
+                    //// Check if they are already added
+                    //DataGridViewRowCollection optionRows = OptionsDataGridView.Rows;
+                    //String existsSAPID;
+                    //var PartsToAddList = new List<string>();
+                    //String[] requiredPart;
+                    //Boolean foundSAPID = false;
+                    //// Loop throught required parts
+                    //foreach (String part in hasRequiredParts)
+                    //{
+                    //    requiredPart = part.Split('^');
+                    //    foundSAPID = false;
+                    //    // Already selected items in options
+                    //    foreach (DataGridViewRow rowOption in optionRows)
+                    //    {
+                    //        existsSAPID = rowOption.Cells[0].Value.ToString();
+                    //        if (existsSAPID == requiredPart[0])
+                    //        {
+                    //            foundSAPID = true;
+                    //            break;
+                    //        }
+                    //    }
+                    //    if (!foundSAPID)
+                    //    {
+                    //        PartsToAddList.Add(part);
+                    //    }
+                    //}
+                    //String[] toAddPart = PartsToAddList.ToArray();
+                    //switch (toAddPart.Length)
+                    //{
+                    //    // Required part already added, do nothing
+                    //    case 0:
+                    //        break;
 
-                        // 1 required part, simple message
-                        case 1:
-                            String[] partToAdd = null;
-                            partToAdd = toAddPart[0].Split('^');
-                            Decimal partItemPrice = Convert.ToDecimal(partToAdd[2]);
-                            // Ask to add part
-                            if (MessageBox.Show("The part\r\n\r\n" + itemSAPID + "  " + itemDescription + "\r\n\r\nhas a required part \r\n\r\n" + partToAdd[0] + "  " + partToAdd[1] + ".\r\n\r\nDo you want to add it?", "Required Part", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                            {
-                                OptionsDataGridView.Rows.Add(partToAdd[0], partToAdd[1], partItemPrice, 1, String.Format("{0:P2}", 0.00), partItemPrice);
-                            }
-                            break;
+                    //    // 1 required part, simple message
+                    //    case 1:
+                    //        String[] partToAdd = null;
+                    //        partToAdd = toAddPart[0].Split('^');
+                    //        Decimal partItemPrice = Convert.ToDecimal(partToAdd[2]);
+                    //        // Ask to add part
+                    //        if (MessageBox.Show("The part\r\n\r\n" + itemSAPID + "  " + itemDescription + "\r\n\r\nhas a required part \r\n\r\n" + partToAdd[0] + "  " + partToAdd[1] + ".\r\n\r\nDo you want to add it?", "Required Part", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    //        {
+                    //            OptionsDataGridView.Rows.Add(partToAdd[0], partToAdd[1], partItemPrice, 1, partItemPrice);
+                    //        }
+                    //        break;
 
-                        // Multiple requires parts, do required panel
-                        default:
-                            // Ask to add parts
-                            RequiredPartCheckedListBox.Items.Clear();
-                            RequiredPartsPanelSelectAllCheckBox.Checked = false;
-                            RequiredPartsPanelHeadingLabel.Text = "The part " + itemSAPID + "  " + itemDescription + " has multiple parts that are required.\r\nPlease select (Double-Click) the parts you would like to add.";
-                            RequiredPartsPanel.Location = new Point(
-                            this.ClientSize.Width / 2 - RequiredPartsPanel.Size.Width / 2,
-                            this.ClientSize.Height / 2 - RequiredPartsPanel.Size.Height / 2);
-                            RequiredPartsPanel.Anchor = AnchorStyles.None;
-                            RequiredPartsPanel.Visible = true;
+                    //    // Multiple requires parts, do required panel
+                    //    default:
+                    //        // Ask to add parts
+                    //        RequiredPartCheckedListBox.Items.Clear();
+                    //        RequiredPartsPanelSelectAllCheckBox.Checked = false;
+                    //        RequiredPartsPanelHeadingLabel.Text = "The part " + itemSAPID + "  " + itemDescription + " has multiple parts that are required.\r\nPlease select (Double-Click) the parts you would like to add.";
+                    //        RequiredPartsPanel.Location = new Point(
+                    //        this.ClientSize.Width / 2 - RequiredPartsPanel.Size.Width / 2,
+                    //        this.ClientSize.Height / 2 - RequiredPartsPanel.Size.Height / 2);
+                    //        RequiredPartsPanel.Anchor = AnchorStyles.None;
+                    //        RequiredPartsPanel.Visible = true;
 
-                            ArrayList quoteItems = new ArrayList();
-                            foreach (String part in toAddPart)
-                            {
-                                requiredPart = part.Split('^');
-                                RequiredPartCheckedListBox.Items.Add(requiredPart[0] + "  " + requiredPart[1]);
+                    //        ArrayList quoteItems = new ArrayList();
+                    //        foreach (String part in toAddPart)
+                    //        {
+                    //            requiredPart = part.Split('^');
+                    //            RequiredPartCheckedListBox.Items.Add(requiredPart[0] + "  " + requiredPart[1]);
 
-                                QuoteItems newItem = new QuoteItems();
-                                newItem.SAPID = requiredPart[0];
-                                newItem.Description = requiredPart[1];
-                                newItem.Price = Convert.ToDecimal(requiredPart[2]);
-                                quoteItems.Add(newItem);
-                            }
-                            passRequiredItems.QuoteTitle = "QuoteOptions";
-                            passRequiredItems.Items = quoteItems;
-                            break;
-                    }
+                    //            QuoteItems newItem = new QuoteItems();
+                    //            newItem.SAPID = requiredPart[0];
+                    //            newItem.Description = requiredPart[1];
+                    //            newItem.Price = Convert.ToDecimal(requiredPart[2]);
+                    //            quoteItems.Add(newItem);
+                    //        }
+                    //        passRequiredItems.QuoteTitle = "QuoteOptions";
+                    //        passRequiredItems.Items = quoteItems;
+                    //        break;
+                    //}
 
                 }
             }
             SumItems(OptionsDataGridView);
         }
 
-        private String[] checkForRequiredParts(String itemSAPID)
+        public String[] checkForRequiredParts(String itemSAPID)
         {
             var foundRequiredPartsList = new List<string>();
             openDB();
@@ -548,6 +565,83 @@ namespace Tecan_Parts
             else
             {
                 return null;
+            }
+        }
+
+        public void doAddRequiredParts(String[] hasRequiredParts, String itemSAPID, String itemDescription)
+        {
+            // Check if they are already added
+            DataGridViewRowCollection optionRows = OptionsDataGridView.Rows;
+            String existsSAPID;
+            var PartsToAddList = new List<string>();
+            String[] requiredPart;
+            Boolean foundSAPID = false;
+            // Loop throught required parts
+            foreach (String part in hasRequiredParts)
+            {
+                requiredPart = part.Split('^');
+                foundSAPID = false;
+                // Already selected items in options
+                foreach (DataGridViewRow rowOption in optionRows)
+                {
+                    existsSAPID = rowOption.Cells[0].Value.ToString();
+                    if (existsSAPID == requiredPart[0])
+                    {
+                        foundSAPID = true;
+                        break;
+                    }
+                }
+                if (!foundSAPID)
+                {
+                    PartsToAddList.Add(part);
+                }
+            }
+            String[] toAddPart = PartsToAddList.ToArray();
+            switch (toAddPart.Length)
+            {
+                // Required part already added, do nothing
+                case 0:
+                    break;
+
+                // 1 required part, simple message
+                case 1:
+                    String[] partToAdd = null;
+                    partToAdd = toAddPart[0].Split('^');
+                    Decimal partItemPrice = Convert.ToDecimal(partToAdd[2]);
+                    // Ask to add part
+                    if (MessageBox.Show("The part\r\n\r\n" + itemSAPID + "  " + itemDescription + "\r\n\r\nhas a required part \r\n\r\n" + partToAdd[0] + "  " + partToAdd[1] + ".\r\n\r\nDo you want to add it?", "Required Part", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        OptionsDataGridView.Rows.Add(partToAdd[0], partToAdd[1], partItemPrice, 1, partItemPrice);
+                    }
+                    break;
+
+                // Multiple requires parts, do required panel
+                default:
+                    // Ask to add parts
+                    RequiredPartCheckedListBox.Items.Clear();
+                    RequiredPartsPanelSelectAllCheckBox.Checked = false;
+                    RequiredPartsPanelHeadingLabel.Text = "The part " + itemSAPID + "  " + itemDescription + " has multiple parts that are required.\r\nPlease select (Double-Click) the parts you would like to add.";
+                    RequiredPartsPanel.Location = new Point(
+                    this.ClientSize.Width / 2 - RequiredPartsPanel.Size.Width / 2,
+                    this.ClientSize.Height / 2 - RequiredPartsPanel.Size.Height / 2);
+                    RequiredPartsPanel.Anchor = AnchorStyles.None;
+                    RequiredPartsPanel.Visible = true;
+
+                    ArrayList quoteItems = new ArrayList();
+                    foreach (String part in toAddPart)
+                    {
+                        requiredPart = part.Split('^');
+                        RequiredPartCheckedListBox.Items.Add(requiredPart[0] + "  " + requiredPart[1]);
+
+                        QuoteItems newItem = new QuoteItems();
+                        newItem.SAPID = requiredPart[0];
+                        newItem.Description = requiredPart[1];
+                        newItem.Price = Convert.ToDecimal(requiredPart[2]);
+                        quoteItems.Add(newItem);
+                    }
+                    passRequiredItems.QuoteTitle = "QuoteOptions";
+                    passRequiredItems.Items = quoteItems;
+                    break;
             }
         }
 
@@ -1625,11 +1719,12 @@ namespace Tecan_Parts
                 if (RequiredPartCheckedListBox.GetItemChecked(i))
                 {
                     quoteSaved = false;
-                    OptionsDataGridView.Rows.Add(row.SAPID, row.Description, Convert.ToDecimal(row.Price), 1, String.Format("{0:P2}", 0.00), Convert.ToDecimal(row.Price));
+                    OptionsDataGridView.Rows.Add(row.SAPID, row.Description, Convert.ToDecimal(row.Price), 1, Convert.ToDecimal(row.Price));
                 }
                 i++;
             }
             RequiredPartsPanel.Visible = false;
+            SumItems(OptionsDataGridView);
         }
 
         private void RequiredPartsPanelSelectAllCheckBox_CheckedChanged(object sender, EventArgs e)

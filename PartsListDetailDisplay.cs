@@ -492,6 +492,34 @@ namespace Tecan_Parts
             return GetDecimals(d, i + 1);
         }
 
+        private void AddToQuoteButton_Click(object sender, EventArgs e)
+        {
+            String itemSAPID;
+            String itemDescription;
+            Decimal itemPrice;
+
+            itemSAPID = sAPIdTextBox.Text;
+            itemDescription = descriptionTextBox.Text;
+            if (iLPTextBox.Text.IndexOf("$") == -1)
+            {
+                itemPrice = Convert.ToDecimal(iLPTextBox.Text);
+            }
+            else
+            {
+                itemPrice = Convert.ToDecimal(iLPTextBox.Text.Replace("$", ""));
+            }
+            mainForm.OptionsDataGridView.Rows.Add(itemSAPID, itemDescription, itemPrice, 1, itemPrice);
+            String[] hasRequiredParts = mainForm.checkForRequiredParts(itemSAPID);
+            if (hasRequiredParts != null)
+            {
+                mainForm.doAddRequiredParts(hasRequiredParts, itemSAPID, itemDescription);
+            }
+
+            mainForm.SumItems(mainForm.OptionsDataGridView);
+            this.Close();
+
+        }
+
         //private void PartsListDetailDisplay_Load(object sender, EventArgs e)
         //{
         //    // TODO: This line of code loads data into the 'tecanCustomerPartsListDataSet.SubCategory' table. You can move, or remove it, as needed.

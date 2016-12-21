@@ -29,20 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainQuoteForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainQuoteForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.partsListDataGridView = new System.Windows.Forms.DataGridView();
-            this.sAPIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partsListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tecanCustomerPartsListDataSet = new Tecan_Parts.TecanCustomerPartsListDataSet();
             this.label1 = new System.Windows.Forms.Label();
@@ -72,12 +68,14 @@
             this.OptionTabPage = new System.Windows.Forms.TabPage();
             this.OptionsRemoveSelectedButton = new System.Windows.Forms.Button();
             this.OptionsDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuoteSettingTabPage = new System.Windows.Forms.TabPage();
+            this.RequiredPartsPanel = new System.Windows.Forms.Panel();
+            this.RequiredPanelCancelButton = new System.Windows.Forms.Button();
+            this.RequiredPanelAddButton = new System.Windows.Forms.Button();
+            this.RequiredPartCheckedListBox = new System.Windows.Forms.CheckedListBox();
+            this.RequiredPartsPanelHeadingLabel = new System.Windows.Forms.Label();
+            this.RequiredPartsPanelSelectAllCheckBox = new System.Windows.Forms.CheckBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.ProfileTecanEmailTextBox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -130,13 +128,13 @@
             this.SubCategoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.subCategoryTableAdapter = new Tecan_Parts.TecanCustomerPartsListDataSetTableAdapters.SubCategoryTableAdapter();
             this.actionStatusLabel = new System.Windows.Forms.Label();
-            this.RequiredPartsPanel = new System.Windows.Forms.Panel();
-            this.label19 = new System.Windows.Forms.Label();
-            this.RequiredPartsPanelSelectAllCheckBox = new System.Windows.Forms.CheckBox();
-            this.RequiredPartsPanelHeadingLabel = new System.Windows.Forms.Label();
-            this.RequiredPartCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.RequiredPanelAddButton = new System.Windows.Forms.Button();
-            this.RequiredPanelCancelButton = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sAPIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.partsListDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.partsListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tecanCustomerPartsListDataSet)).BeginInit();
@@ -146,61 +144,31 @@
             this.OptionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OptionsDataGridView)).BeginInit();
             this.QuoteSettingTabPage.SuspendLayout();
+            this.RequiredPartsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InstrumentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CategoryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SubCategoryBindingSource)).BeginInit();
-            this.RequiredPartsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // partsListDataGridView
             // 
             this.partsListDataGridView.AutoGenerateColumns = false;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.partsListDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
             this.partsListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.partsListDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.sAPIdDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});
             this.partsListDataGridView.DataSource = this.partsListBindingSource;
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.partsListDataGridView.DefaultCellStyle = dataGridViewCellStyle32;
-            this.partsListDataGridView.Location = new System.Drawing.Point(6, 265);
-            this.partsListDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.partsListDataGridView.Location = new System.Drawing.Point(11, 162);
+            this.partsListDataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.partsListDataGridView.Name = "partsListDataGridView";
             this.partsListDataGridView.ReadOnly = true;
+            this.partsListDataGridView.RowHeadersVisible = false;
             this.partsListDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.partsListDataGridView.Size = new System.Drawing.Size(696, 652);
+            this.partsListDataGridView.Size = new System.Drawing.Size(444, 529);
             this.partsListDataGridView.TabIndex = 1;
             this.partsListDataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.partsListDataGridView_MouseDown);
             this.partsListDataGridView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.partsListDataGridView_MouseMove);
-            // 
-            // sAPIdDataGridViewTextBoxColumn
-            // 
-            this.sAPIdDataGridViewTextBoxColumn.DataPropertyName = "SAPId";
-            this.sAPIdDataGridViewTextBoxColumn.HeaderText = "Part#";
-            this.sAPIdDataGridViewTextBoxColumn.Name = "sAPIdDataGridViewTextBoxColumn";
-            this.sAPIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.descriptionDataGridViewTextBoxColumn.Width = 300;
             // 
             // partsListBindingSource
             // 
@@ -215,39 +183,40 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(46, 57);
+            this.label1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(38, 46);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 24);
+            this.label1.Size = new System.Drawing.Size(91, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "Instrument";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(62, 102);
+            this.label2.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(55, 82);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 24);
+            this.label2.Size = new System.Drawing.Size(79, 19);
             this.label2.TabIndex = 3;
             this.label2.Text = "Category";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(27, 149);
+            this.label3.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(27, 119);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 24);
+            this.label3.Size = new System.Drawing.Size(107, 19);
             this.label3.TabIndex = 4;
             this.label3.Text = "Subcategory";
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.PowderBlue;
+            this.menuStrip1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.profileToolStripMenuItem,
@@ -257,7 +226,7 @@
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
             this.menuStrip1.ShowItemToolTips = true;
-            this.menuStrip1.Size = new System.Drawing.Size(1881, 35);
+            this.menuStrip1.Size = new System.Drawing.Size(1394, 28);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -269,48 +238,48 @@
             this.printQuoteToolStripMenuItem,
             this.sendQuoteToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 29);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadQuoteToolStripMenuItem
             // 
             this.loadQuoteToolStripMenuItem.Name = "loadQuoteToolStripMenuItem";
-            this.loadQuoteToolStripMenuItem.Size = new System.Drawing.Size(175, 30);
+            this.loadQuoteToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.loadQuoteToolStripMenuItem.Text = "Load Order";
             this.loadQuoteToolStripMenuItem.Click += new System.EventHandler(this.loadQuoteToolStripMenuItem_Click);
             // 
             // saveQuoteToolStripMenuItem
             // 
             this.saveQuoteToolStripMenuItem.Name = "saveQuoteToolStripMenuItem";
-            this.saveQuoteToolStripMenuItem.Size = new System.Drawing.Size(175, 30);
+            this.saveQuoteToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveQuoteToolStripMenuItem.Text = "Save Order";
             this.saveQuoteToolStripMenuItem.Click += new System.EventHandler(this.saveQuoteToolStripMenuItem_Click);
             // 
             // printQuoteToolStripMenuItem
             // 
             this.printQuoteToolStripMenuItem.Name = "printQuoteToolStripMenuItem";
-            this.printQuoteToolStripMenuItem.Size = new System.Drawing.Size(175, 30);
+            this.printQuoteToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.printQuoteToolStripMenuItem.Text = "View Order";
             this.printQuoteToolStripMenuItem.Click += new System.EventHandler(this.printQuoteToolStripMenuItem_Click);
             // 
             // sendQuoteToolStripMenuItem
             // 
             this.sendQuoteToolStripMenuItem.Name = "sendQuoteToolStripMenuItem";
-            this.sendQuoteToolStripMenuItem.Size = new System.Drawing.Size(175, 30);
+            this.sendQuoteToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.sendQuoteToolStripMenuItem.Text = "Send Order";
             this.sendQuoteToolStripMenuItem.Click += new System.EventHandler(this.sendQuoteToolStripMenuItem_Click);
             // 
             // profileToolStripMenuItem
             // 
             this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
-            this.profileToolStripMenuItem.Size = new System.Drawing.Size(104, 29);
+            this.profileToolStripMenuItem.Size = new System.Drawing.Size(89, 22);
             this.profileToolStripMenuItem.Text = "My Profile";
             this.profileToolStripMenuItem.Click += new System.EventHandler(this.profileToolStripMenuItem_Click);
             // 
             // clearQuoteToolStripMenuItem
             // 
             this.clearQuoteToolStripMenuItem.Name = "clearQuoteToolStripMenuItem";
-            this.clearQuoteToolStripMenuItem.Size = new System.Drawing.Size(114, 29);
+            this.clearQuoteToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.clearQuoteToolStripMenuItem.Text = "Clear Order";
             this.clearQuoteToolStripMenuItem.ToolTipText = "Clear All Quote, Option, and Smart Start Items and All Quote Information";
             this.clearQuoteToolStripMenuItem.Click += new System.EventHandler(this.clearQuoteToolStripMenuItem_Click);
@@ -318,17 +287,17 @@
             // updateDatabaseFilesToolStripMenuItem
             // 
             this.updateDatabaseFilesToolStripMenuItem.Name = "updateDatabaseFilesToolStripMenuItem";
-            this.updateDatabaseFilesToolStripMenuItem.Size = new System.Drawing.Size(200, 29);
+            this.updateDatabaseFilesToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.updateDatabaseFilesToolStripMenuItem.Text = "Update Database Files";
             this.updateDatabaseFilesToolStripMenuItem.Click += new System.EventHandler(this.updateDatabaseFilesToolStripMenuItem_Click);
             // 
             // InstrumentComboBox
             // 
             this.InstrumentComboBox.FormattingEnabled = true;
-            this.InstrumentComboBox.Location = new System.Drawing.Point(160, 55);
-            this.InstrumentComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.InstrumentComboBox.Location = new System.Drawing.Point(142, 42);
+            this.InstrumentComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.InstrumentComboBox.Name = "InstrumentComboBox";
-            this.InstrumentComboBox.Size = new System.Drawing.Size(244, 28);
+            this.InstrumentComboBox.Size = new System.Drawing.Size(183, 26);
             this.InstrumentComboBox.TabIndex = 8;
             this.InstrumentComboBox.SelectedIndexChanged += new System.EventHandler(this.InstrumentComboBox_SelectedIndexChanged);
             this.InstrumentComboBox.Click += new System.EventHandler(this.InstrumentComboBox_Click);
@@ -336,10 +305,10 @@
             // CategoryComboBox
             // 
             this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(160, 100);
-            this.CategoryComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CategoryComboBox.Location = new System.Drawing.Point(142, 79);
+            this.CategoryComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.CategoryComboBox.Name = "CategoryComboBox";
-            this.CategoryComboBox.Size = new System.Drawing.Size(244, 28);
+            this.CategoryComboBox.Size = new System.Drawing.Size(183, 26);
             this.CategoryComboBox.TabIndex = 9;
             this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             this.CategoryComboBox.Click += new System.EventHandler(this.CategoryComboBox_Click);
@@ -347,10 +316,10 @@
             // SubCategoryComboBox
             // 
             this.SubCategoryComboBox.FormattingEnabled = true;
-            this.SubCategoryComboBox.Location = new System.Drawing.Point(160, 148);
-            this.SubCategoryComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SubCategoryComboBox.Location = new System.Drawing.Point(142, 116);
+            this.SubCategoryComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.SubCategoryComboBox.Name = "SubCategoryComboBox";
-            this.SubCategoryComboBox.Size = new System.Drawing.Size(244, 28);
+            this.SubCategoryComboBox.Size = new System.Drawing.Size(183, 26);
             this.SubCategoryComboBox.TabIndex = 10;
             this.SubCategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.SubCategoryComboBox_SelectedIndexChanged);
             this.SubCategoryComboBox.Click += new System.EventHandler(this.SubCategoryComboBox_Click);
@@ -358,51 +327,51 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(2, 223);
+            this.label5.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(400, 73);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 24);
+            this.label5.Size = new System.Drawing.Size(55, 19);
             this.label5.TabIndex = 11;
             this.label5.Text = "Part#:";
             // 
             // PartNumberSearchTextBox
             // 
-            this.PartNumberSearchTextBox.Location = new System.Drawing.Point(64, 220);
-            this.PartNumberSearchTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PartNumberSearchTextBox.Location = new System.Drawing.Point(463, 70);
+            this.PartNumberSearchTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PartNumberSearchTextBox.Name = "PartNumberSearchTextBox";
-            this.PartNumberSearchTextBox.Size = new System.Drawing.Size(163, 26);
+            this.PartNumberSearchTextBox.Size = new System.Drawing.Size(106, 26);
             this.PartNumberSearchTextBox.TabIndex = 12;
             this.PartNumberSearchTextBox.TextChanged += new System.EventHandler(this.PartNumberSearchTextBox_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(254, 223);
+            this.label6.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(352, 119);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(125, 24);
+            this.label6.Size = new System.Drawing.Size(103, 19);
             this.label6.TabIndex = 13;
             this.label6.Text = "Description:";
             // 
             // DescriptionSearchTextBox
             // 
-            this.DescriptionSearchTextBox.Location = new System.Drawing.Point(374, 220);
-            this.DescriptionSearchTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DescriptionSearchTextBox.Location = new System.Drawing.Point(463, 116);
+            this.DescriptionSearchTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.DescriptionSearchTextBox.Name = "DescriptionSearchTextBox";
-            this.DescriptionSearchTextBox.Size = new System.Drawing.Size(298, 26);
+            this.DescriptionSearchTextBox.Size = new System.Drawing.Size(149, 26);
             this.DescriptionSearchTextBox.TabIndex = 14;
             this.DescriptionSearchTextBox.TextChanged += new System.EventHandler(this.DescriptionSearchTextBox_TextChanged);
             // 
             // PartNumberClearButton
             // 
             this.PartNumberClearButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.PartNumberClearButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PartNumberClearButton.Location = new System.Drawing.Point(213, 220);
-            this.PartNumberClearButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PartNumberClearButton.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PartNumberClearButton.Location = new System.Drawing.Point(577, 70);
+            this.PartNumberClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.PartNumberClearButton.Name = "PartNumberClearButton";
-            this.PartNumberClearButton.Size = new System.Drawing.Size(32, 31);
+            this.PartNumberClearButton.Size = new System.Drawing.Size(24, 30);
             this.PartNumberClearButton.TabIndex = 15;
             this.PartNumberClearButton.Text = "C";
             this.PartNumberClearButton.UseVisualStyleBackColor = false;
@@ -411,11 +380,11 @@
             // DescriptionClearButton
             // 
             this.DescriptionClearButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.DescriptionClearButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DescriptionClearButton.Location = new System.Drawing.Point(662, 220);
-            this.DescriptionClearButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DescriptionClearButton.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DescriptionClearButton.Location = new System.Drawing.Point(620, 116);
+            this.DescriptionClearButton.Margin = new System.Windows.Forms.Padding(4);
             this.DescriptionClearButton.Name = "DescriptionClearButton";
-            this.DescriptionClearButton.Size = new System.Drawing.Size(32, 31);
+            this.DescriptionClearButton.Size = new System.Drawing.Size(24, 30);
             this.DescriptionClearButton.TabIndex = 16;
             this.DescriptionClearButton.Text = "C";
             this.DescriptionClearButton.UseVisualStyleBackColor = false;
@@ -423,19 +392,19 @@
             // 
             // PartDetailTextBox
             // 
-            this.PartDetailTextBox.Location = new System.Drawing.Point(11, 951);
-            this.PartDetailTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PartDetailTextBox.Location = new System.Drawing.Point(9, 760);
+            this.PartDetailTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PartDetailTextBox.Multiline = true;
             this.PartDetailTextBox.Name = "PartDetailTextBox";
-            this.PartDetailTextBox.Size = new System.Drawing.Size(488, 160);
+            this.PartDetailTextBox.Size = new System.Drawing.Size(446, 241);
             this.PartDetailTextBox.TabIndex = 17;
             // 
             // partImagePictureBox
             // 
-            this.partImagePictureBox.Location = new System.Drawing.Point(518, 1021);
-            this.partImagePictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.partImagePictureBox.Location = new System.Drawing.Point(936, 760);
+            this.partImagePictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.partImagePictureBox.Name = "partImagePictureBox";
-            this.partImagePictureBox.Size = new System.Drawing.Size(184, 208);
+            this.partImagePictureBox.Size = new System.Drawing.Size(184, 187);
             this.partImagePictureBox.TabIndex = 18;
             this.partImagePictureBox.TabStop = false;
             // 
@@ -443,49 +412,53 @@
             // 
             this.QuoteTabControl.Controls.Add(this.OptionTabPage);
             this.QuoteTabControl.Controls.Add(this.QuoteSettingTabPage);
-            this.QuoteTabControl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.QuoteTabControl.Location = new System.Drawing.Point(726, 265);
-            this.QuoteTabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.QuoteTabControl.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuoteTabControl.Location = new System.Drawing.Point(463, 162);
+            this.QuoteTabControl.Margin = new System.Windows.Forms.Padding(4);
             this.QuoteTabControl.Name = "QuoteTabControl";
             this.QuoteTabControl.SelectedIndex = 0;
-            this.QuoteTabControl.Size = new System.Drawing.Size(1137, 935);
+            this.QuoteTabControl.Size = new System.Drawing.Size(913, 529);
             this.QuoteTabControl.TabIndex = 19;
             // 
             // OptionTabPage
             // 
             this.OptionTabPage.Controls.Add(this.OptionsRemoveSelectedButton);
             this.OptionTabPage.Controls.Add(this.OptionsDataGridView);
-            this.OptionTabPage.Location = new System.Drawing.Point(4, 33);
-            this.OptionTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.OptionTabPage.Controls.Add(this.label11);
+            this.OptionTabPage.Controls.Add(this.OptionsItemsPriceTextBox);
+            this.OptionTabPage.Location = new System.Drawing.Point(4, 30);
+            this.OptionTabPage.Margin = new System.Windows.Forms.Padding(4);
             this.OptionTabPage.Name = "OptionTabPage";
-            this.OptionTabPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.OptionTabPage.Size = new System.Drawing.Size(1129, 898);
+            this.OptionTabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.OptionTabPage.Size = new System.Drawing.Size(905, 495);
             this.OptionTabPage.TabIndex = 1;
             this.OptionTabPage.Text = "Order Items";
             this.OptionTabPage.UseVisualStyleBackColor = true;
             // 
             // OptionsRemoveSelectedButton
             // 
-            this.OptionsRemoveSelectedButton.Location = new System.Drawing.Point(0, 846);
-            this.OptionsRemoveSelectedButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.OptionsRemoveSelectedButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.OptionsRemoveSelectedButton.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OptionsRemoveSelectedButton.Location = new System.Drawing.Point(8, 453);
+            this.OptionsRemoveSelectedButton.Margin = new System.Windows.Forms.Padding(4);
             this.OptionsRemoveSelectedButton.Name = "OptionsRemoveSelectedButton";
-            this.OptionsRemoveSelectedButton.Size = new System.Drawing.Size(194, 45);
+            this.OptionsRemoveSelectedButton.Size = new System.Drawing.Size(199, 36);
             this.OptionsRemoveSelectedButton.TabIndex = 3;
             this.OptionsRemoveSelectedButton.Text = "Remove Selected";
-            this.OptionsRemoveSelectedButton.UseVisualStyleBackColor = true;
+            this.OptionsRemoveSelectedButton.UseVisualStyleBackColor = false;
             this.OptionsRemoveSelectedButton.Click += new System.EventHandler(this.OptionsRemoveSelectedButton_Click);
             // 
             // OptionsDataGridView
             // 
             this.OptionsDataGridView.AllowUserToAddRows = false;
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OptionsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OptionsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.OptionsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OptionsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -494,64 +467,15 @@
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn7});
             this.OptionsDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.OptionsDataGridView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.OptionsDataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.OptionsDataGridView.Name = "OptionsDataGridView";
             this.OptionsDataGridView.RowHeadersVisible = false;
             this.OptionsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.OptionsDataGridView.Size = new System.Drawing.Size(1125, 846);
+            this.OptionsDataGridView.Size = new System.Drawing.Size(901, 451);
             this.OptionsDataGridView.TabIndex = 2;
             this.OptionsDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OptionsDataGridView_CellValueChanged);
             this.OptionsDataGridView.DragDrop += new System.Windows.Forms.DragEventHandler(this.OptionsDataGridView_DragDrop);
             this.OptionsDataGridView.DragEnter += new System.Windows.Forms.DragEventHandler(this.OptionsDataGridView_DragEnter);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "SAP ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.FillWeight = 350F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Description";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 450;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle34.Format = "C2";
-            dataGridViewCellStyle34.NullValue = null;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle34;
-            this.dataGridViewTextBoxColumn4.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Price";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn4.Width = 90;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle35.Format = "N0";
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle35;
-            this.dataGridViewTextBoxColumn5.FillWeight = 30F;
-            this.dataGridViewTextBoxColumn5.HeaderText = "Qty";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn5.Width = 30;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle36.Format = "C2";
-            dataGridViewCellStyle36.NullValue = null;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle36;
-            this.dataGridViewTextBoxColumn7.FillWeight = 80F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Extended Price";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
             // QuoteSettingTabPage
             // 
@@ -581,265 +505,358 @@
             this.QuoteSettingTabPage.Controls.Add(this.label16);
             this.QuoteSettingTabPage.Controls.Add(this.QuoteTitleTextBox);
             this.QuoteSettingTabPage.Controls.Add(this.label15);
-            this.QuoteSettingTabPage.Location = new System.Drawing.Point(4, 33);
-            this.QuoteSettingTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.QuoteSettingTabPage.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuoteSettingTabPage.Location = new System.Drawing.Point(4, 30);
+            this.QuoteSettingTabPage.Margin = new System.Windows.Forms.Padding(4);
             this.QuoteSettingTabPage.Name = "QuoteSettingTabPage";
-            this.QuoteSettingTabPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.QuoteSettingTabPage.Size = new System.Drawing.Size(1129, 898);
+            this.QuoteSettingTabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.QuoteSettingTabPage.Size = new System.Drawing.Size(912, 495);
             this.QuoteSettingTabPage.TabIndex = 3;
             this.QuoteSettingTabPage.Text = "Order Information";
             this.QuoteSettingTabPage.UseVisualStyleBackColor = true;
             // 
+            // RequiredPartsPanel
+            // 
+            this.RequiredPartsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPanelCancelButton);
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPanelAddButton);
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPartCheckedListBox);
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPartsPanelHeadingLabel);
+            this.RequiredPartsPanel.Controls.Add(this.RequiredPartsPanelSelectAllCheckBox);
+            this.RequiredPartsPanel.Controls.Add(this.label19);
+            this.RequiredPartsPanel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPartsPanel.Location = new System.Drawing.Point(225, 70);
+            this.RequiredPartsPanel.Name = "RequiredPartsPanel";
+            this.RequiredPartsPanel.Size = new System.Drawing.Size(690, 381);
+            this.RequiredPartsPanel.TabIndex = 45;
+            this.RequiredPartsPanel.Visible = false;
+            // 
+            // RequiredPanelCancelButton
+            // 
+            this.RequiredPanelCancelButton.BackColor = System.Drawing.Color.PowderBlue;
+            this.RequiredPanelCancelButton.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPanelCancelButton.Location = new System.Drawing.Point(384, 321);
+            this.RequiredPanelCancelButton.Name = "RequiredPanelCancelButton";
+            this.RequiredPanelCancelButton.Size = new System.Drawing.Size(120, 31);
+            this.RequiredPanelCancelButton.TabIndex = 5;
+            this.RequiredPanelCancelButton.Text = "Cancel";
+            this.RequiredPanelCancelButton.UseVisualStyleBackColor = false;
+            this.RequiredPanelCancelButton.Click += new System.EventHandler(this.RequiredPanelCancelButton_Click);
+            // 
+            // RequiredPanelAddButton
+            // 
+            this.RequiredPanelAddButton.BackColor = System.Drawing.Color.PowderBlue;
+            this.RequiredPanelAddButton.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPanelAddButton.Location = new System.Drawing.Point(146, 321);
+            this.RequiredPanelAddButton.Name = "RequiredPanelAddButton";
+            this.RequiredPanelAddButton.Size = new System.Drawing.Size(89, 31);
+            this.RequiredPanelAddButton.TabIndex = 4;
+            this.RequiredPanelAddButton.Text = "Add";
+            this.RequiredPanelAddButton.UseVisualStyleBackColor = false;
+            this.RequiredPanelAddButton.Click += new System.EventHandler(this.RequiredPanelAddButton_Click);
+            // 
+            // RequiredPartCheckedListBox
+            // 
+            this.RequiredPartCheckedListBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPartCheckedListBox.FormattingEnabled = true;
+            this.RequiredPartCheckedListBox.Location = new System.Drawing.Point(33, 146);
+            this.RequiredPartCheckedListBox.Name = "RequiredPartCheckedListBox";
+            this.RequiredPartCheckedListBox.Size = new System.Drawing.Size(623, 151);
+            this.RequiredPartCheckedListBox.TabIndex = 3;
+            // 
+            // RequiredPartsPanelHeadingLabel
+            // 
+            this.RequiredPartsPanelHeadingLabel.AutoSize = true;
+            this.RequiredPartsPanelHeadingLabel.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPartsPanelHeadingLabel.Location = new System.Drawing.Point(40, 34);
+            this.RequiredPartsPanelHeadingLabel.Name = "RequiredPartsPanelHeadingLabel";
+            this.RequiredPartsPanelHeadingLabel.Size = new System.Drawing.Size(0, 18);
+            this.RequiredPartsPanelHeadingLabel.TabIndex = 2;
+            // 
+            // RequiredPartsPanelSelectAllCheckBox
+            // 
+            this.RequiredPartsPanelSelectAllCheckBox.AutoSize = true;
+            this.RequiredPartsPanelSelectAllCheckBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RequiredPartsPanelSelectAllCheckBox.Location = new System.Drawing.Point(33, 118);
+            this.RequiredPartsPanelSelectAllCheckBox.Name = "RequiredPartsPanelSelectAllCheckBox";
+            this.RequiredPartsPanelSelectAllCheckBox.Size = new System.Drawing.Size(98, 22);
+            this.RequiredPartsPanelSelectAllCheckBox.TabIndex = 1;
+            this.RequiredPartsPanelSelectAllCheckBox.Text = "Select All";
+            this.RequiredPartsPanelSelectAllCheckBox.UseVisualStyleBackColor = true;
+            this.RequiredPartsPanelSelectAllCheckBox.CheckedChanged += new System.EventHandler(this.RequiredPartsPanelSelectAllCheckBox_CheckedChanged);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(248, 10);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(123, 19);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "Required Parts";
+            // 
             // label18
             // 
-            this.label18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(303, 698);
+            this.label18.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(433, 184);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(420, 63);
+            this.label18.Size = new System.Drawing.Size(313, 70);
             this.label18.TabIndex = 49;
-            this.label18.Text = "To edit above, please select the My Profile menu item at the top of the screen.";
+            this.label18.Text = "To edit, please select the My Profile menu item at the top of the screen.";
             // 
             // ProfileTecanEmailTextBox
             // 
-            this.ProfileTecanEmailTextBox.Location = new System.Drawing.Point(309, 634);
-            this.ProfileTecanEmailTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfileTecanEmailTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProfileTecanEmailTextBox.Location = new System.Drawing.Point(520, 141);
+            this.ProfileTecanEmailTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfileTecanEmailTextBox.Name = "ProfileTecanEmailTextBox";
-            this.ProfileTecanEmailTextBox.Size = new System.Drawing.Size(412, 30);
+            this.ProfileTecanEmailTextBox.Size = new System.Drawing.Size(219, 26);
             this.ProfileTecanEmailTextBox.TabIndex = 48;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(218, 640);
+            this.label13.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(440, 149);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(84, 21);
+            this.label13.Size = new System.Drawing.Size(72, 18);
             this.label13.TabIndex = 47;
             this.label13.Text = "Email To:";
             // 
             // ProfileStateComboBox
             // 
+            this.ProfileStateComboBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProfileStateComboBox.FormattingEnabled = true;
-            this.ProfileStateComboBox.Location = new System.Drawing.Point(308, 488);
-            this.ProfileStateComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfileStateComboBox.Location = new System.Drawing.Point(164, 402);
+            this.ProfileStateComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfileStateComboBox.Name = "ProfileStateComboBox";
-            this.ProfileStateComboBox.Size = new System.Drawing.Size(73, 32);
+            this.ProfileStateComboBox.Size = new System.Drawing.Size(73, 26);
             this.ProfileStateComboBox.TabIndex = 46;
             // 
             // ProfileZipcodeTextBox
             // 
-            this.ProfileZipcodeTextBox.Location = new System.Drawing.Point(309, 538);
-            this.ProfileZipcodeTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfileZipcodeTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProfileZipcodeTextBox.Location = new System.Drawing.Point(164, 446);
+            this.ProfileZipcodeTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfileZipcodeTextBox.Name = "ProfileZipcodeTextBox";
-            this.ProfileZipcodeTextBox.Size = new System.Drawing.Size(148, 30);
+            this.ProfileZipcodeTextBox.Size = new System.Drawing.Size(148, 26);
             this.ProfileZipcodeTextBox.TabIndex = 45;
             // 
             // ProfileCityTextBox
             // 
-            this.ProfileCityTextBox.Location = new System.Drawing.Point(308, 437);
-            this.ProfileCityTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfileCityTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProfileCityTextBox.Location = new System.Drawing.Point(164, 358);
+            this.ProfileCityTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfileCityTextBox.Name = "ProfileCityTextBox";
-            this.ProfileCityTextBox.Size = new System.Drawing.Size(412, 30);
+            this.ProfileCityTextBox.Size = new System.Drawing.Size(219, 26);
             this.ProfileCityTextBox.TabIndex = 44;
             // 
             // ProfileShippingAddressTextBox
             // 
-            this.ProfileShippingAddressTextBox.Location = new System.Drawing.Point(309, 386);
-            this.ProfileShippingAddressTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfileShippingAddressTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProfileShippingAddressTextBox.Location = new System.Drawing.Point(164, 314);
+            this.ProfileShippingAddressTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfileShippingAddressTextBox.Name = "ProfileShippingAddressTextBox";
-            this.ProfileShippingAddressTextBox.Size = new System.Drawing.Size(410, 30);
+            this.ProfileShippingAddressTextBox.Size = new System.Drawing.Size(219, 26);
             this.ProfileShippingAddressTextBox.TabIndex = 43;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(218, 542);
+            this.label12.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(87, 449);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(79, 21);
+            this.label12.Size = new System.Drawing.Size(69, 18);
             this.label12.TabIndex = 42;
             this.label12.Text = "Zipcode:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(242, 491);
+            this.label8.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(107, 405);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(57, 21);
+            this.label8.Size = new System.Drawing.Size(49, 18);
             this.label8.TabIndex = 41;
             this.label8.Text = "State:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(254, 440);
+            this.label10.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(117, 361);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 21);
+            this.label10.Size = new System.Drawing.Size(39, 18);
             this.label10.TabIndex = 40;
             this.label10.Text = "City:";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(138, 389);
+            this.label9.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(20, 317);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(154, 21);
+            this.label9.Size = new System.Drawing.Size(136, 18);
             this.label9.TabIndex = 39;
             this.label9.Text = "Shipping Address:";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(375, 605);
+            this.label14.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(503, 116);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(181, 24);
+            this.label14.Size = new System.Drawing.Size(167, 21);
             this.label14.TabIndex = 38;
             this.label14.Text = "Tecan Information";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(375, 140);
+            this.label17.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(190, 113);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(152, 24);
+            this.label17.Size = new System.Drawing.Size(141, 21);
             this.label17.TabIndex = 37;
             this.label17.Text = "My Information";
             // 
             // ProfileEmailTextBox
             // 
-            this.ProfileEmailTextBox.Location = new System.Drawing.Point(308, 335);
-            this.ProfileEmailTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfileEmailTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProfileEmailTextBox.Location = new System.Drawing.Point(164, 270);
+            this.ProfileEmailTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfileEmailTextBox.Name = "ProfileEmailTextBox";
-            this.ProfileEmailTextBox.Size = new System.Drawing.Size(412, 30);
+            this.ProfileEmailTextBox.Size = new System.Drawing.Size(219, 26);
             this.ProfileEmailTextBox.TabIndex = 34;
             // 
             // ProfilePhoneTextBox
             // 
-            this.ProfilePhoneTextBox.Location = new System.Drawing.Point(308, 285);
-            this.ProfilePhoneTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfilePhoneTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProfilePhoneTextBox.Location = new System.Drawing.Point(164, 226);
+            this.ProfilePhoneTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfilePhoneTextBox.Name = "ProfilePhoneTextBox";
-            this.ProfilePhoneTextBox.Size = new System.Drawing.Size(176, 30);
+            this.ProfilePhoneTextBox.Size = new System.Drawing.Size(121, 26);
             this.ProfilePhoneTextBox.TabIndex = 33;
             // 
             // ProfileCompanyTextBox
             // 
-            this.ProfileCompanyTextBox.Location = new System.Drawing.Point(308, 234);
-            this.ProfileCompanyTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfileCompanyTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProfileCompanyTextBox.Location = new System.Drawing.Point(164, 182);
+            this.ProfileCompanyTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfileCompanyTextBox.Name = "ProfileCompanyTextBox";
-            this.ProfileCompanyTextBox.Size = new System.Drawing.Size(412, 30);
+            this.ProfileCompanyTextBox.Size = new System.Drawing.Size(219, 26);
             this.ProfileCompanyTextBox.TabIndex = 32;
             // 
             // ProfileNameTextBox
             // 
-            this.ProfileNameTextBox.Location = new System.Drawing.Point(308, 183);
-            this.ProfileNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProfileNameTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProfileNameTextBox.Location = new System.Drawing.Point(164, 138);
+            this.ProfileNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfileNameTextBox.Name = "ProfileNameTextBox";
-            this.ProfileNameTextBox.Size = new System.Drawing.Size(412, 30);
+            this.ProfileNameTextBox.Size = new System.Drawing.Size(219, 26);
             this.ProfileNameTextBox.TabIndex = 31;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(204, 237);
+            this.label20.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(77, 185);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(91, 21);
+            this.label20.Size = new System.Drawing.Size(79, 18);
             this.label20.TabIndex = 29;
             this.label20.Text = "Company:";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(164, 338);
+            this.label21.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(42, 273);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(128, 21);
+            this.label21.Size = new System.Drawing.Size(114, 18);
             this.label21.TabIndex = 28;
             this.label21.Text = "Email Address:";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(158, 288);
+            this.label22.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(40, 229);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(135, 21);
+            this.label22.Size = new System.Drawing.Size(116, 18);
             this.label22.TabIndex = 27;
             this.label22.Text = "Phone Number:";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(232, 186);
+            this.label23.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(102, 141);
             this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(62, 21);
+            this.label23.Size = new System.Drawing.Size(54, 18);
             this.label23.TabIndex = 26;
             this.label23.Text = "Name:";
             // 
             // label7
             // 
-            this.label7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(75, 77);
+            this.label7.Font = new System.Drawing.Font("Arial", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(66, 39);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(500, 63);
+            this.label7.Size = new System.Drawing.Size(393, 49);
             this.label7.TabIndex = 5;
-            this.label7.Text = "Order file will be saved with this name and date.   Please do not use any special" +
-    " characters (. or , or / or -)";
+            this.label7.Text = "Order file will be saved with this name and date.\r\nPlease do not use any special " +
+    "characters (. or , or / or -)";
             // 
             // QuoteDateTimePicker
             // 
             this.QuoteDateTimePicker.CalendarFont = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.QuoteDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.QuoteDateTimePicker.Location = new System.Drawing.Point(812, 38);
-            this.QuoteDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.QuoteDateTimePicker.Location = new System.Drawing.Point(460, 9);
+            this.QuoteDateTimePicker.Margin = new System.Windows.Forms.Padding(4);
             this.QuoteDateTimePicker.Name = "QuoteDateTimePicker";
-            this.QuoteDateTimePicker.Size = new System.Drawing.Size(148, 30);
+            this.QuoteDateTimePicker.Size = new System.Drawing.Size(148, 26);
             this.QuoteDateTimePicker.TabIndex = 4;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(741, 43);
+            this.label16.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(395, 10);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(60, 24);
+            this.label16.Size = new System.Drawing.Size(57, 21);
             this.label16.TabIndex = 2;
             this.label16.Text = "Date:";
             // 
             // QuoteTitleTextBox
             // 
-            this.QuoteTitleTextBox.Location = new System.Drawing.Point(80, 38);
-            this.QuoteTitleTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.QuoteTitleTextBox.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuoteTitleTextBox.Location = new System.Drawing.Point(69, 8);
+            this.QuoteTitleTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.QuoteTitleTextBox.Name = "QuoteTitleTextBox";
-            this.QuoteTitleTextBox.Size = new System.Drawing.Size(640, 30);
+            this.QuoteTitleTextBox.Size = new System.Drawing.Size(288, 26);
             this.QuoteTitleTextBox.TabIndex = 3;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(24, 43);
+            this.label15.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(17, 9);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(58, 24);
+            this.label15.Size = new System.Drawing.Size(55, 21);
             this.label15.TabIndex = 0;
             this.label15.Text = "Title:";
             // 
@@ -847,7 +864,7 @@
             // 
             this.instLabel2.AutoSize = true;
             this.instLabel2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instLabel2.Location = new System.Drawing.Point(452, 924);
+            this.instLabel2.Location = new System.Drawing.Point(79, 725);
             this.instLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.instLabel2.Name = "instLabel2";
             this.instLabel2.Size = new System.Drawing.Size(246, 22);
@@ -858,7 +875,7 @@
             // 
             this.instLabel1.AutoSize = true;
             this.instLabel1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instLabel1.Location = new System.Drawing.Point(4, 924);
+            this.instLabel1.Location = new System.Drawing.Point(27, 700);
             this.instLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.instLabel1.Name = "instLabel1";
             this.instLabel1.Size = new System.Drawing.Size(401, 22);
@@ -868,11 +885,11 @@
             // ClearFiltersButton
             // 
             this.ClearFiltersButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClearFiltersButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClearFiltersButton.Location = new System.Drawing.Point(430, 102);
-            this.ClearFiltersButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ClearFiltersButton.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClearFiltersButton.Location = new System.Drawing.Point(333, 39);
+            this.ClearFiltersButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClearFiltersButton.Name = "ClearFiltersButton";
-            this.ClearFiltersButton.Size = new System.Drawing.Size(69, 32);
+            this.ClearFiltersButton.Size = new System.Drawing.Size(69, 30);
             this.ClearFiltersButton.TabIndex = 22;
             this.ClearFiltersButton.Text = "Clear";
             this.ClearFiltersButton.UseVisualStyleBackColor = false;
@@ -882,7 +899,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(1522, 1208);
+            this.label11.Location = new System.Drawing.Point(557, 461);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(164, 21);
@@ -892,8 +909,8 @@
             // OptionsItemsPriceTextBox
             // 
             this.OptionsItemsPriceTextBox.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OptionsItemsPriceTextBox.Location = new System.Drawing.Point(1680, 1203);
-            this.OptionsItemsPriceTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.OptionsItemsPriceTextBox.Location = new System.Drawing.Point(722, 458);
+            this.OptionsItemsPriceTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.OptionsItemsPriceTextBox.Name = "OptionsItemsPriceTextBox";
             this.OptionsItemsPriceTextBox.Size = new System.Drawing.Size(175, 26);
             this.OptionsItemsPriceTextBox.TabIndex = 35;
@@ -902,10 +919,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(1088, 80);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox1.Location = new System.Drawing.Point(816, 55);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(768, 142);
+            this.pictureBox1.Size = new System.Drawing.Size(556, 117);
             this.pictureBox1.TabIndex = 39;
             this.pictureBox1.TabStop = false;
             // 
@@ -914,7 +931,7 @@
             this.SalemansNameLabel.AutoSize = true;
             this.SalemansNameLabel.BackColor = System.Drawing.Color.PowderBlue;
             this.SalemansNameLabel.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SalemansNameLabel.Location = new System.Drawing.Point(1473, 9);
+            this.SalemansNameLabel.Location = new System.Drawing.Point(872, 8);
             this.SalemansNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalemansNameLabel.Name = "SalemansNameLabel";
             this.SalemansNameLabel.Size = new System.Drawing.Size(24, 19);
@@ -923,11 +940,11 @@
             // 
             // NotesTextBox
             // 
-            this.NotesTextBox.Location = new System.Drawing.Point(9, 1122);
-            this.NotesTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.NotesTextBox.Location = new System.Drawing.Point(463, 760);
+            this.NotesTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.NotesTextBox.Multiline = true;
             this.NotesTextBox.Name = "NotesTextBox";
-            this.NotesTextBox.Size = new System.Drawing.Size(490, 104);
+            this.NotesTextBox.Size = new System.Drawing.Size(448, 241);
             this.NotesTextBox.TabIndex = 41;
             // 
             // Column8
@@ -944,10 +961,10 @@
             // 
             // Column6
             // 
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle37.Format = "C2";
-            dataGridViewCellStyle37.NullValue = null;
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle29.Format = "C2";
+            dataGridViewCellStyle29.NullValue = null;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle29;
             this.Column6.FillWeight = 80F;
             this.Column6.HeaderText = "Extended Price";
             this.Column6.Name = "Column6";
@@ -956,10 +973,10 @@
             // 
             // Column5
             // 
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle38.Format = "N2";
-            dataGridViewCellStyle38.NullValue = "0";
-            this.Column5.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle30.Format = "N2";
+            dataGridViewCellStyle30.NullValue = "0";
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle30;
             this.Column5.FillWeight = 60F;
             this.Column5.HeaderText = "Discount";
             this.Column5.Name = "Column5";
@@ -967,9 +984,9 @@
             // 
             // Column4
             // 
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle39.Format = "N0";
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle31.Format = "N0";
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle31;
             this.Column4.FillWeight = 30F;
             this.Column4.HeaderText = "Qty";
             this.Column4.Name = "Column4";
@@ -979,10 +996,10 @@
             // 
             // Column3
             // 
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle40.Format = "C2";
-            dataGridViewCellStyle40.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle32.Format = "C2";
+            dataGridViewCellStyle32.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle32;
             this.Column3.FillWeight = 70F;
             this.Column3.HeaderText = "List Price";
             this.Column3.Name = "Column3";
@@ -1008,20 +1025,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(513, 951);
+            this.label4.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(463, 728);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 24);
+            this.label4.Size = new System.Drawing.Size(54, 19);
             this.label4.TabIndex = 42;
             this.label4.Text = "Price:";
             // 
             // itemPriceTextBox
             // 
-            this.itemPriceTextBox.Location = new System.Drawing.Point(518, 981);
-            this.itemPriceTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.itemPriceTextBox.Location = new System.Drawing.Point(525, 724);
+            this.itemPriceTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.itemPriceTextBox.Name = "itemPriceTextBox";
-            this.itemPriceTextBox.Size = new System.Drawing.Size(182, 26);
+            this.itemPriceTextBox.Size = new System.Drawing.Size(125, 26);
             this.itemPriceTextBox.TabIndex = 43;
             this.itemPriceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -1060,95 +1077,85 @@
             // 
             this.actionStatusLabel.AutoSize = true;
             this.actionStatusLabel.Font = new System.Drawing.Font("Arial", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.actionStatusLabel.Location = new System.Drawing.Point(710, 9);
+            this.actionStatusLabel.Location = new System.Drawing.Point(710, 8);
             this.actionStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.actionStatusLabel.Name = "actionStatusLabel";
             this.actionStatusLabel.Size = new System.Drawing.Size(0, 21);
             this.actionStatusLabel.TabIndex = 44;
             // 
-            // RequiredPartsPanel
+            // dataGridViewTextBoxColumn1
             // 
-            this.RequiredPartsPanel.Controls.Add(this.RequiredPanelCancelButton);
-            this.RequiredPartsPanel.Controls.Add(this.RequiredPanelAddButton);
-            this.RequiredPartsPanel.Controls.Add(this.RequiredPartCheckedListBox);
-            this.RequiredPartsPanel.Controls.Add(this.RequiredPartsPanelHeadingLabel);
-            this.RequiredPartsPanel.Controls.Add(this.RequiredPartsPanelSelectAllCheckBox);
-            this.RequiredPartsPanel.Controls.Add(this.label19);
-            this.RequiredPartsPanel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RequiredPartsPanel.Location = new System.Drawing.Point(519, 375);
-            this.RequiredPartsPanel.Name = "RequiredPartsPanel";
-            this.RequiredPartsPanel.Size = new System.Drawing.Size(870, 499);
-            this.RequiredPartsPanel.TabIndex = 45;
-            this.RequiredPartsPanel.Visible = false;
+            this.dataGridViewTextBoxColumn1.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "SAP ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 75;
             // 
-            // label19
+            // dataGridViewTextBoxColumn3
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(355, 19);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(151, 24);
-            this.label19.TabIndex = 0;
-            this.label19.Text = "Required Parts";
+            this.dataGridViewTextBoxColumn3.FillWeight = 300F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 300;
             // 
-            // RequiredPartsPanelSelectAllCheckBox
+            // dataGridViewTextBoxColumn4
             // 
-            this.RequiredPartsPanelSelectAllCheckBox.AutoSize = true;
-            this.RequiredPartsPanelSelectAllCheckBox.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RequiredPartsPanelSelectAllCheckBox.Location = new System.Drawing.Point(122, 127);
-            this.RequiredPartsPanelSelectAllCheckBox.Name = "RequiredPartsPanelSelectAllCheckBox";
-            this.RequiredPartsPanelSelectAllCheckBox.Size = new System.Drawing.Size(117, 27);
-            this.RequiredPartsPanelSelectAllCheckBox.TabIndex = 1;
-            this.RequiredPartsPanelSelectAllCheckBox.Text = "Select All";
-            this.RequiredPartsPanelSelectAllCheckBox.UseVisualStyleBackColor = true;
-            this.RequiredPartsPanelSelectAllCheckBox.CheckedChanged += new System.EventHandler(this.RequiredPartsPanelSelectAllCheckBox_CheckedChanged);
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle26.Format = "C2";
+            dataGridViewCellStyle26.NullValue = null;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle26;
+            this.dataGridViewTextBoxColumn4.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Price";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn4.Width = 90;
             // 
-            // RequiredPartsPanelHeadingLabel
+            // dataGridViewTextBoxColumn5
             // 
-            this.RequiredPartsPanelHeadingLabel.AutoSize = true;
-            this.RequiredPartsPanelHeadingLabel.Location = new System.Drawing.Point(75, 59);
-            this.RequiredPartsPanelHeadingLabel.Name = "RequiredPartsPanelHeadingLabel";
-            this.RequiredPartsPanelHeadingLabel.Size = new System.Drawing.Size(0, 21);
-            this.RequiredPartsPanelHeadingLabel.TabIndex = 2;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.Format = "N0";
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle27;
+            this.dataGridViewTextBoxColumn5.FillWeight = 30F;
+            this.dataGridViewTextBoxColumn5.HeaderText = "Qty";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn5.Width = 30;
             // 
-            // RequiredPartCheckedListBox
+            // dataGridViewTextBoxColumn7
             // 
-            this.RequiredPartCheckedListBox.FormattingEnabled = true;
-            this.RequiredPartCheckedListBox.Location = new System.Drawing.Point(122, 188);
-            this.RequiredPartCheckedListBox.Name = "RequiredPartCheckedListBox";
-            this.RequiredPartCheckedListBox.Size = new System.Drawing.Size(623, 188);
-            this.RequiredPartCheckedListBox.TabIndex = 3;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle28.Format = "C2";
+            dataGridViewCellStyle28.NullValue = null;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle28;
+            this.dataGridViewTextBoxColumn7.FillWeight = 80F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Extended Price";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // RequiredPanelAddButton
+            // sAPIdDataGridViewTextBoxColumn
             // 
-            this.RequiredPanelAddButton.BackColor = System.Drawing.Color.PowderBlue;
-            this.RequiredPanelAddButton.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RequiredPanelAddButton.Location = new System.Drawing.Point(283, 424);
-            this.RequiredPanelAddButton.Name = "RequiredPanelAddButton";
-            this.RequiredPanelAddButton.Size = new System.Drawing.Size(89, 34);
-            this.RequiredPanelAddButton.TabIndex = 4;
-            this.RequiredPanelAddButton.Text = "Add";
-            this.RequiredPanelAddButton.UseVisualStyleBackColor = false;
-            this.RequiredPanelAddButton.Click += new System.EventHandler(this.RequiredPanelAddButton_Click);
+            this.sAPIdDataGridViewTextBoxColumn.DataPropertyName = "SAPId";
+            this.sAPIdDataGridViewTextBoxColumn.FillWeight = 70F;
+            this.sAPIdDataGridViewTextBoxColumn.HeaderText = "Part#";
+            this.sAPIdDataGridViewTextBoxColumn.Name = "sAPIdDataGridViewTextBoxColumn";
+            this.sAPIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sAPIdDataGridViewTextBoxColumn.Width = 75;
             // 
-            // RequiredPanelCancelButton
+            // descriptionDataGridViewTextBoxColumn
             // 
-            this.RequiredPanelCancelButton.BackColor = System.Drawing.Color.PowderBlue;
-            this.RequiredPanelCancelButton.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RequiredPanelCancelButton.Location = new System.Drawing.Point(496, 424);
-            this.RequiredPanelCancelButton.Name = "RequiredPanelCancelButton";
-            this.RequiredPanelCancelButton.Size = new System.Drawing.Size(120, 34);
-            this.RequiredPanelCancelButton.TabIndex = 5;
-            this.RequiredPanelCancelButton.Text = "Cancel";
-            this.RequiredPanelCancelButton.UseVisualStyleBackColor = false;
-            this.RequiredPanelCancelButton.Click += new System.EventHandler(this.RequiredPanelCancelButton_Click);
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.FillWeight = 300F;
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.descriptionDataGridViewTextBoxColumn.Width = 200;
             // 
             // MainQuoteForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.BlanchedAlmond;
-            this.ClientSize = new System.Drawing.Size(1881, 1259);
+            this.ClientSize = new System.Drawing.Size(1394, 1014);
             this.Controls.Add(this.RequiredPartsPanel);
             this.Controls.Add(this.actionStatusLabel);
             this.Controls.Add(this.itemPriceTextBox);
@@ -1156,8 +1163,6 @@
             this.Controls.Add(this.NotesTextBox);
             this.Controls.Add(this.SalemansNameLabel);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.OptionsItemsPriceTextBox);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.ClearFiltersButton);
             this.Controls.Add(this.instLabel1);
             this.Controls.Add(this.instLabel2);
@@ -1178,9 +1183,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.partsListDataGridView);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainQuoteForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Order Tecan Parts";
@@ -1194,15 +1200,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.partImagePictureBox)).EndInit();
             this.QuoteTabControl.ResumeLayout(false);
             this.OptionTabPage.ResumeLayout(false);
+            this.OptionTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OptionsDataGridView)).EndInit();
             this.QuoteSettingTabPage.ResumeLayout(false);
             this.QuoteSettingTabPage.PerformLayout();
+            this.RequiredPartsPanel.ResumeLayout(false);
+            this.RequiredPartsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InstrumentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CategoryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SubCategoryBindingSource)).EndInit();
-            this.RequiredPartsPanel.ResumeLayout(false);
-            this.RequiredPartsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1234,7 +1241,7 @@
         private System.Windows.Forms.TabPage QuoteSettingTabPage;
         private System.Windows.Forms.Label instLabel2;
         private System.Windows.Forms.Label instLabel1;
-        private System.Windows.Forms.DataGridView OptionsDataGridView;
+        public System.Windows.Forms.DataGridView OptionsDataGridView;
         private System.Windows.Forms.Button ClearFiltersButton;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox OptionsItemsPriceTextBox;
@@ -1270,13 +1277,6 @@
         private TecanCustomerPartsListDataSetTableAdapters.CategoryTableAdapter categoryTableAdapter;
         private System.Windows.Forms.BindingSource SubCategoryBindingSource;
         private TecanCustomerPartsListDataSetTableAdapters.SubCategoryTableAdapter subCategoryTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sAPIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox itemPriceTextBox;
         private System.Windows.Forms.Label label7;
@@ -1310,6 +1310,13 @@
         private System.Windows.Forms.Label RequiredPartsPanelHeadingLabel;
         private System.Windows.Forms.CheckBox RequiredPartsPanelSelectAllCheckBox;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sAPIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
     }
 }
 
