@@ -91,7 +91,7 @@ namespace Tecan_Parts
                 getUsersProfile();
             }
             // Checks DB and copies / loads if required
-            else if (partsListBindingSource.Count == 1)
+            else if (partsListBindingSource.Count <= 1)
             {
                 showUserProfileForm(true);
             }
