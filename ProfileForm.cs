@@ -41,7 +41,8 @@ namespace Tecan_Parts
                 ProfileCityTextBox.Text = profile.City;
                 ProfileStateComboBox.SelectedIndex = ProfileStateComboBox.FindStringExact(profile.State);
                 ProfileZipcodeTextBox.Text = profile.Zipcode;
-                ProfileTecanEmailTextBox.Text = profile.TecanEmail;
+                ProfileTecanOrderEmailTextBox.Text = profile.TecanOrderEmail;
+                ProfileTecanSupportEmailTextBox.Text = profile.TecanSupportEmail;
                 ProfileDistributionFolderTextBox.Text = profile.DistributionFolder;
             }
         }
@@ -156,11 +157,16 @@ namespace Tecan_Parts
                 profileError = true;
                 errorMessage = errorMessage + "Your Zipcode.\n\n";
             }
-            util = new RegexUtilities();
-            if (ProfileTecanEmailTextBox.Text == "" || !util.IsValidEmail(ProfileTecanEmailTextBox.Text))
+            // util = new RegexUtilities();
+            if (ProfileTecanOrderEmailTextBox.Text == "" || !util.IsValidEmail(ProfileTecanOrderEmailTextBox.Text))
             {
                 profileError = true;
-                errorMessage = errorMessage + "Your Tecan Email Address.\n\n";
+                errorMessage = errorMessage + "Your Tecan Order Email Address.\n\n";
+            }
+            if (ProfileTecanSupportEmailTextBox.Text == "" || !util.IsValidEmail(ProfileTecanSupportEmailTextBox.Text))
+            {
+                profileError = true;
+                errorMessage = errorMessage + "Your Tecan Support Email Address.\n\n";
             }
             if (ProfileDistributionFolderTextBox.Text == "")
             {
@@ -185,7 +191,8 @@ namespace Tecan_Parts
                 profile.City = ProfileCityTextBox.Text;
                 profile.State = ProfileStateComboBox.Text;
                 profile.Zipcode = ProfileZipcodeTextBox.Text;
-                profile.TecanEmail = ProfileTecanEmailTextBox.Text;
+                profile.TecanOrderEmail = ProfileTecanOrderEmailTextBox.Text;
+                profile.TecanSupportEmail = ProfileTecanSupportEmailTextBox.Text;
                 profile.DistributionFolder = ProfileDistributionFolderTextBox.Text;
 
                 // Save to Profile config file
@@ -198,26 +205,35 @@ namespace Tecan_Parts
                 writer.Serialize(file, profile);
                 file.Close();
                 this.Close();
-                
+                mainForm.getUsersProfile();
+
                 if (doInitialization)
                 {
-                    Boolean fileFound;
-                    fileFound = mainForm.copyDatabaseToWorkingFolder(profile.DistributionFolder);
-                    if(!fileFound)
-                    {
-                        MessageBox.Show("The Distribution Folder you selected does not contain the Parts List Database!\n\nPlease select a new folder");
-                        mainForm.showUserProfileForm(true);
-                    }
-                    else
-                    {
-                        mainForm.getUsersProfile();
-                        mainForm.MainQuoteForm_Load(sender, e);
-                    }
+                    // Copy database from distribution folder 
+                    mainForm.copyDatabaseToWorkingFolder();
                 }
                 else
                 {
-                    mainForm.getUsersProfile();
+                    mainForm.checkForNewDatabase();
                 }
+
+                //    Boolean fileFound;
+                //    fileFound = mainForm.copyDatabaseToWorkingFolder(profile.DistributionFolder);
+                //    if(!fileFound)
+                //    {
+                //        MessageBox.Show("The Distribution Folder you selected does not contain the Parts List Database!\n\nPlease select a new folder");
+                //        mainForm.showUserProfileForm(true);
+                //    }
+                //    else
+                //    {
+                //        mainForm.getUsersProfile();
+                //        mainForm.MainQuoteForm_Load(sender, e);
+                //    }
+                //}
+                //else
+                //{
+                //    mainForm.getUsersProfile();
+                //}
             }
 
         }

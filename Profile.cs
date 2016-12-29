@@ -38,8 +38,11 @@ namespace Tecan_Parts
         [XmlElementAttribute("Zipcode")]
         public string Zipcode;
 
-        [XmlElementAttribute("TecanEmail")]
-        public string TecanEmail;
+        [XmlElementAttribute("TecanOrderEmail")]
+        public string TecanOrderEmail;
+
+        [XmlElementAttribute("TecanSupportEmail")]
+        public string TecanSupportEmail;
 
         [XmlElementAttribute("DistributionFolder")]
         public string DistributionFolder;

@@ -19,6 +19,7 @@ using iTextSharp;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.xml;
+using System.Threading;
 using System.Net.Mail;
 using System.Diagnostics;
 
@@ -60,12 +61,28 @@ namespace Tecan_Parts
             // TODO: This line of code loads data into the 'TecanCustomerPartsListDataSet11.SubCategory' table. You can move, or remove it, as needed.
             this.subCategoryTableAdapter.Fill(this.tecanCustomerPartsListDataSet.SubCategory);
             // TODO: This line of code loads data into the 'TecanCustomerPartsListDataSet11.Category' table. You can move, or remove it, as needed.
+
             System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
             ToolTip1.SetToolTip(this.PartNumberClearButton, "Clear Part Number Search");
             ToolTip1.SetToolTip(this.DescriptionClearButton, "Clear Description Search");
             ToolTip1.SetToolTip(this.ClearFiltersButton, "Reset All Category Filters");
 
-            // Check for salesman profile, if no file get salesman information
+            // Center all panels
+            RequiredPartsPanel.Location = new Point(
+            this.ClientSize.Width / 2 - RequiredPartsPanel.Size.Width / 2,
+            this.ClientSize.Height / 2 - RequiredPartsPanel.Size.Height / 2);
+            RequiredPartsPanel.Anchor = AnchorStyles.None;
+
+            PleaseWaitPanel.Location = new Point(
+            this.ClientSize.Width / 2 - PleaseWaitPanel.Size.Width / 2,
+            this.ClientSize.Height / 2 - PleaseWaitPanel.Size.Height / 2);
+            PleaseWaitPanel.Anchor = AnchorStyles.None;
+
+            //BugReportPanel.Location = new Point(
+            //this.ClientSize.Width / 2 - BugReportPanel.Size.Width / 2,
+            //this.ClientSize.Height / 2 - BugReportPanel.Size.Height / 2);
+            //BugReportPanel.Anchor = AnchorStyles.None;
+
             // Check if Quote Database is empty
             if (partsListBindingSource.Count != 0)
             {
@@ -80,6 +97,35 @@ namespace Tecan_Parts
             }
         }
 
+        private void FormIsClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!quoteSaved)
+            {
+                if (MessageBox.Show("This order has not been saved or you have made changes!\r\n\r\nDo you want to save before closing?", "Save Order", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                    saveQuoteToolStripMenuItem_Click(sender, e);
+                }
+            }
+        }
+
+        public void doFormInitialization()
+        {
+            this.subCategoryTableAdapter.Fill(this.tecanCustomerPartsListDataSet.SubCategory);
+            this.categoryTableAdapter.Fill(this.tecanCustomerPartsListDataSet.Category);
+            this.instrumentTableAdapter.Fill(this.tecanCustomerPartsListDataSet.Instrument);
+            this.partsListTableAdapter.Fill(this.tecanCustomerPartsListDataSet.PartsList);
+            this.subCategoryTableAdapter.Fill(this.tecanCustomerPartsListDataSet.SubCategory);
+
+            // Check if Quote Database is empty
+            if (partsListBindingSource.Count != 0)
+            {
+                loadFilterComboBoxes();
+                setPartDetailTextBox();
+                QuoteTabControl.SelectedTab = QuoteSettingTabPage;
+            }
+        }
+
         // Called from Form Shown Event!
         // Reads or Creates users profile xml file.
         private void getProfileAndDatabase(object sender, EventArgs e)
@@ -89,6 +135,7 @@ namespace Tecan_Parts
             if (File.Exists(profileFile) && partsListBindingSource.Count > 1)
             {
                 getUsersProfile();
+                checkForNewDatabase();
             }
             // Checks DB and copies / loads if required
             else if (partsListBindingSource.Count <= 1)
@@ -181,6 +228,33 @@ namespace Tecan_Parts
             //}
         }
 
+        public void checkForNewDatabase()
+        {
+            String distributionPath = profile.DistributionFolder;
+            String quoteDistributionFile;
+            DateTime distributionFileDate;
+
+            String quoteCurrentFile;
+            DateTime currentFileDate;
+
+            quoteDistributionFile = System.IO.Path.Combine(distributionPath, "TecanQuoteGeneratorPartsList.sdf");
+            quoteCurrentFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanQuoteGeneratorPartsList.sdf");
+
+            if (File.Exists(quoteDistributionFile))
+            {
+                FileInfo fi = new FileInfo(quoteDistributionFile);
+                distributionFileDate = fi.LastWriteTime;
+                currentFileDate = profile.DatabaseCreationDate;
+                if (distributionFileDate > currentFileDate)
+                {
+                    if (MessageBox.Show("There is a new parts list database file available. Do you want me to update the database now?", "Update Database", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        copyDatabaseToWorkingFolder();
+                    }
+                }
+            }
+        }
+
         public void showUserProfileForm(Boolean NeedsDB)
         {
             ProfileForm profileForm = new ProfileForm(NeedsDB);
@@ -189,50 +263,161 @@ namespace Tecan_Parts
             Application.OpenForms["ProfileForm"].BringToFront();
         }
 
-        // If blank database or new database available copy new database to working folder
-        // todo See if Supplemental database is needed
-        public Boolean copyDatabaseToWorkingFolder(String sourcePath)
+                // If blank database or new database available copy new database to working folder
+        public void copyDatabaseToWorkingFolder()
         {
-            String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
-            if (File.Exists(profileFile))
-            {
-                String quoteSourceFile = "";
-                String supplementSourceFile;
+            PleaseWaitMessageTextBox.Text = "Copying the database may take a couple minutes!";
+            PleaseWaitPanel.Visible = true;
 
+            Thread copyThread;
+            copyThread = new Thread(new ThreadStart(doTheCopy));
+            copyThread.Start();
+            while (copyThread.IsAlive)
+            {
+                Application.DoEvents();
+            }
+            if (!PleaseWaitMessageTextBox.Text.Contains("failed"))
+            {
+                doFormInitialization();
+                PleaseWaitPanel.Visible = false;
+            }
+            else
+            {
+                PleaseWaitHeadingLabel.ForeColor = System.Drawing.Color.Red;
+                PleaseWaitHeadingLabel.Text = "Copy Failed!";
+                PleaseWaitPanelOKButton.Visible = true;
+            }
+        }
+
+        //// If blank database or new database available copy new database to working folder
+        //// todo See if Supplemental database is needed
+        //public Boolean copyDatabaseToWorkingFolder(String sourcePath)
+        //{
+        //    String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
+        //    if (File.Exists(profileFile))
+        //    {
+        //        String quoteSourceFile = "";
+        //        String supplementSourceFile;
+
+        //        // Where new files will go
+        //        String quoteTargetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanCustomerPartsList.sdf");
+        //        String supplementTargetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanSuppDocs.sdf");
+
+        //        // Where the new files will come from
+        //        try
+        //        {
+        //            quoteSourceFile = System.IO.Path.Combine(sourcePath, "TecanCustomerPartsList.sdf");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message.ToString());
+        //        }
+        //        supplementSourceFile = System.IO.Path.Combine(sourcePath, "TecanSuppDocs.sdf");
+
+        //        // Verify the files exisit before copy
+        //        if (!File.Exists(quoteSourceFile))
+        //        {
+        //            return false;
+        //        }
+
+        //        getUsersProfile();
+        //        FileInfo fi = new FileInfo(quoteSourceFile);
+        //        profile.DatabaseCreationDate = fi.CreationTime;
+        //        saveUsersProfile();
+        //        System.IO.File.Copy(quoteSourceFile, quoteTargetFile, true);
+        //        System.IO.File.Copy(supplementSourceFile, supplementTargetFile, true);
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        getUsersProfile();
+        //        return false;
+        //    }
+        //}
+
+        private void doTheCopy()
+        {
+            String quoteSourceFile = "";
+            String supplementSourceFile = "";
+            String sourcePath = profile.DistributionFolder;
+
+            // Db source file locations
+            quoteSourceFile = System.IO.Path.Combine(sourcePath, "TecanCustomerPartsList.sdf");
+            supplementSourceFile = System.IO.Path.Combine(sourcePath, "TecanSuppDocs.sdf");
+
+            String errorMessage = "";
+            Boolean foundError = false;
+
+            // Test file exists
+            if (!File.Exists(quoteSourceFile))
+            {
+                errorMessage = "Your distribution folder does not contain a Partslist Database file (TecanCustomerPartsList.sdf) \r\n\r\n";
+                foundError = true;
+            }
+            else if (!File.Exists(supplementSourceFile))
+            {
+                errorMessage += "Your distribution folder does not contain a Suppumental Documents file (TecanSuppDocs.sdf) \r\n";
+                foundError = true;
+            }
+
+            if (!foundError)
+            {
                 // Where new files will go
                 String quoteTargetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanCustomerPartsList.sdf");
                 String supplementTargetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "TecanSuppDocs.sdf");
 
-                // Where the new files will come from
-                try
-                {
-                    quoteSourceFile = System.IO.Path.Combine(sourcePath, "TecanCustomerPartsList.sdf");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
-                supplementSourceFile = System.IO.Path.Combine(sourcePath, "TecanSuppDocs.sdf");
-
-                // Verify the files exisit before copy
-                if (!File.Exists(quoteSourceFile))
-                {
-                    return false;
-                }
-
-                getUsersProfile();
-                FileInfo fi = new FileInfo(quoteSourceFile);
-                profile.DatabaseCreationDate = fi.CreationTime;
-                saveUsersProfile();
+                // Copy the files
                 System.IO.File.Copy(quoteSourceFile, quoteTargetFile, true);
                 System.IO.File.Copy(supplementSourceFile, supplementTargetFile, true);
-                return true;
+
+                // Save the new Db Timestamp
+                // getUsersProfile();
+                FileInfo fi = new FileInfo(quoteSourceFile);
+                profile.DatabaseCreationDate = fi.LastWriteTime;
+                saveUsersProfile();
+
+                if (PleaseWaitMessageTextBox.InvokeRequired)
+                {
+                    // It's on a different thread, so use Invoke.
+                    SetTextCallback d = new SetTextCallback(SetText);
+                    Invoke(d, new object[] { "Copy Complete!" });
+                }
+                else
+                {
+                    // It's on the same thread, no need for Invoke 
+                    PleaseWaitMessageTextBox.Text = "Copy Complete!";
+                }
             }
             else
             {
-                getUsersProfile();
-                return false;
+                // Tell user to get the files
+                if (PleaseWaitMessageTextBox.InvokeRequired)
+                {
+                    // It's on a different thread, so use Invoke.
+                    SetTextCallback d = new SetTextCallback(SetText);
+                    Invoke(d, new object[] { "Copying the database failed!\r\n\r\n" + errorMessage + 
+                        "\r\nPlease copy the required file(s) to your distribution folder, or use the Edit - " +
+                        "My Profile menu item to select a different distribution folder!"});
+                }
+                else
+                {
+                    // It's on the same thread, no need for Invoke 
+                    PleaseWaitMessageTextBox.Text = "Copying the database failed!\r\n\r\n" + errorMessage +
+                        "\r\nPlease copy the required file(s) to your distribution folder, or use the Edit - " +
+                        "My Profile menu item to select a different distribution folder!";
+                }
             }
+        }
+
+        // This delegate enables asynchronous calls for setting
+        // the text property on a TextBox control.
+        delegate void SetTextCallback(string text);
+
+        // This method is passed in to the SetTextCallBack delegate 
+        // to set the Text property of textBox1. 
+        private void SetText(string text)
+        {
+            this.PleaseWaitMessageTextBox.Text = text;
         }
 
         // Initial Lookup Table lists, used for filtering displayed Parts
@@ -1208,7 +1393,7 @@ namespace Tecan_Parts
             Quote quote = new Quote();
             quote.QuoteTitle = QuoteTitleTextBox.Text;
             quote.QuoteDate = QuoteDateTimePicker.Value;
-            quote.QuoteEmailTo = ProfileTecanEmailTextBox.Text;
+            quote.QuoteEmailTo = ProfileTecanOrderEmailTextBox.Text;
             // quote.Items = AddQuoteItems(QuoteDataGridViewM);
             quote.Items = AddQuoteItems(OptionsDataGridView);
             // quote.ThirdParty = AddQuoteItems(ThirdPartyDataGridView);
@@ -1232,6 +1417,7 @@ namespace Tecan_Parts
             writer.Serialize(file, quote);
             file.Close();
             actionStatusLabel.Text = "";
+            MessageBox.Show("Order " + QuoteFileName + " saved", "Order Saved");
         }
 
         private ArrayList AddQuoteItems(DataGridView myDataGridView)
@@ -1321,7 +1507,8 @@ namespace Tecan_Parts
                 Decimal itemPrice;
                 Decimal extendedPrice;
                 Int32 itemQuantity;
-                //Decimal itemDiscount;
+                QuoteItems replacementItem;
+                String replacementString;
 
                 foreach (QuoteItems row in quote.Items)
                 {
@@ -1331,12 +1518,60 @@ namespace Tecan_Parts
                     itemQuantity = row.Quantity;
                     extendedPrice = itemPrice * itemQuantity;
 
-                    OptionsDataGridView.Rows.Add(itemSAPID, itemDescription, itemPrice, itemQuantity, extendedPrice);
+
+                    replacementItem = validateItem(itemSAPID);
+                    if (replacementItem.SAPID == "found")
+                    {
+                        OptionsDataGridView.Rows.Add(itemSAPID, itemDescription, itemPrice, itemQuantity, extendedPrice);
+                    }
+                    else
+                    {
+                        replacementString = "This item " + itemSAPID + " " + itemDescription + " is no longer available!\r\n\r\n" +
+                            "Do you want to add it's replacement instead?";
+
+                        if (MessageBox.Show(replacementString, "Part no longer available", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            OptionsDataGridView.Rows.Add(replacementItem.SAPID, replacementItem.Description, replacementItem.Price, itemQuantity, replacementItem.Price * itemQuantity);
+                        }
+                    }
                 }
                 QuoteTabControl.SelectedTab = OptionTabPage;
                 SumItems(OptionsDataGridView);
 
             }
+        }
+
+        private QuoteItems validateItem(String itemSAPID)
+        {
+            QuoteItems foundItem = new QuoteItems();
+            Boolean itemFound = false;
+
+            openDB();
+            SqlCeCommand cmd = TecanDatabase.CreateCommand();
+            cmd.CommandText = "SELECT SAPId FROM PartsList WHERE SAPId = '" + itemSAPID + "'";
+            SqlCeDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                itemFound = true;
+            }
+            if (itemFound)
+            {
+                foundItem.SAPID = "found";
+            }
+            else
+            {
+                cmd.CommandText = "SELECT SAPId, Description, ILP FROM PartsList WHERE OldPartNum = '" + itemSAPID + "'";
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    foundItem.SAPID = reader[0].ToString();
+                    foundItem.Description = reader[1].ToString();
+                    foundItem.Price = (Decimal)reader[2];
+                }
+            }
+            reader.Dispose();
+            TecanDatabase.Close();
+            return foundItem;
         }
 
         private void myProfileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1364,7 +1599,7 @@ namespace Tecan_Parts
                 loadStateComboBox();
                 ProfileStateComboBox.SelectedIndex = ProfileStateComboBox.FindStringExact(profile.State);
                 ProfileZipcodeTextBox.Text = profile.Zipcode;
-                ProfileTecanEmailTextBox.Text = profile.TecanEmail;
+                ProfileTecanOrderEmailTextBox.Text = profile.TecanOrderEmail;
             }
             else
             {
@@ -1427,7 +1662,6 @@ namespace Tecan_Parts
             ProfileStateComboBox.Items.Add("WV");
             ProfileStateComboBox.Items.Add("WI");
             ProfileStateComboBox.Items.Add("WY");
-
         }
 
         private void saveUsersProfile()
@@ -1506,27 +1740,37 @@ namespace Tecan_Parts
 
         private void updateDatabaseFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
-            if (File.Exists(profileFile))
+            if (profile.DistributionFolder != "")
             {
-                String distributionFolder = profile.DistributionFolder;
-                Boolean fileFound;
-                fileFound = copyDatabaseToWorkingFolder(distributionFolder);
-                if (!fileFound)
-                {
-                    MessageBox.Show("The Distribution Folder you selected in your profile does not contain the Parts List Database!\n\nPlease select a new folder");
-                    showUserProfileForm(true);
-                }
-                else
-                {
-                    MessageBox.Show("New Parts List Database Loaded!");
-                    MainQuoteForm_Load(sender, e);
-                }
+                copyDatabaseToWorkingFolder();
             }
             else
             {
-                getUsersProfile();
+                // Show please wait panel with error, open profile form
+                MessageBox.Show("error");
             }
+
+            //String profileFile = @"c:\TecanFiles\" + "TecanConfig.cfg";
+            //if (File.Exists(profileFile))
+            //{
+            //    String distributionFolder = profile.DistributionFolder;
+            //    Boolean fileFound;
+            //    fileFound = copyDatabaseToWorkingFolder(distributionFolder);
+            //    if (!fileFound)
+            //    {
+            //        MessageBox.Show("The Distribution Folder you selected in your profile does not contain the Parts List Database!\n\nPlease select a new folder");
+            //        showUserProfileForm(true);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("New Parts List Database Loaded!");
+            //        MainQuoteForm_Load(sender, e);
+            //    }
+            //}
+            //else
+            //{
+            //    getUsersProfile();
+            //}
         }
 
         private void updateActionStatus(string status)
@@ -1615,7 +1859,7 @@ namespace Tecan_Parts
             string fullAttachmentPathName = attachmentPath + "\\" + QuoteTitleTextBox.Text + ".csv";
 
             // Setup mail message
-            MailAddress to = new MailAddress(ProfileTecanEmailTextBox.Text);
+            MailAddress to = new MailAddress(ProfileTecanOrderEmailTextBox.Text);
             MailAddress from = new MailAddress(ProfileEmailTextBox.Text);
             var mailMessage = new MailMessage(from, to);
             mailMessage.Subject = ProfileCompanyTextBox.Text + " Parts Order";
@@ -1660,7 +1904,7 @@ namespace Tecan_Parts
             sData += ProfileZipcodeTextBox.Text + "\n";
             sData += ProfilePhoneTextBox.Text + "\n";
             sData += ProfileEmailTextBox.Text + "\n";
-            sData += ProfileTecanEmailTextBox.Text + "\n\n";
+            sData += ProfileTecanOrderEmailTextBox.Text + "\n\n";
             ArrayList quoteItems = new ArrayList();
             quoteItems = AddQuoteItems(OptionsDataGridView);
             string formatChar = "";
@@ -1749,5 +1993,60 @@ namespace Tecan_Parts
         {
             RequiredPartsPanel.Visible = false;
         }
+
+        private void reportABugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BugReportPanel.Visible = true;
+            BugReportTextBox.Focus();
+        }
+
+        private void BugReportSendButton_Click(object sender, EventArgs e)
+        {
+            String bugReportMessageString = "Operation System: " + Environment.OSVersion + "\n\n";
+            bugReportMessageString += BugReportTextBox.Text;
+
+            // Setup mail message
+            MailAddress to = new MailAddress(profile.TecanSupportEmail);
+            MailAddress from = new MailAddress(profile.Email);
+            var mailMessage = new MailMessage(from, to);
+            mailMessage.Subject = "Customer Parts List Bug Report";
+            mailMessage.Body = bugReportMessageString;
+            // mailMessage.Attachments.Add(new Attachment(fullAttachmentPathName));
+
+            // var filename = attachmentPath + "\\mymessage.eml";
+            String tempFilePath = createTempFile();
+            var filename = tempFilePath + "\\mymessage.eml";
+
+            //save the MailMessage to the filesystem
+            mailMessage.Save(filename);
+
+            //Open the file with the default associated application registered on the local machine
+            Process.Start(filename);
+            BugReportTextBox.Text = "";
+            BugReportPanel.Visible = false;
+        }
+
+        private string createTempFile()
+        {
+            // Create the new file in temp directory
+            String tempFilePath = @AppDomain.CurrentDomain.BaseDirectory.ToString() + "temp";
+            System.IO.Directory.CreateDirectory(tempFilePath);
+
+            // If temp directory current contains any files, delete them
+            System.IO.DirectoryInfo tempFiles = new DirectoryInfo(tempFilePath);
+
+            foreach (FileInfo file in tempFiles.GetFiles())
+            {
+                file.Delete();
+            }
+            return tempFilePath;
+        }
+
+        private void BugReportCancelButton_Click(object sender, EventArgs e)
+        {
+            BugReportTextBox.Text = "";
+            BugReportPanel.Visible = false;
+        }
+
     }
 }
